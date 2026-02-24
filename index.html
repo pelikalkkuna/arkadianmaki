@@ -2289,9 +2289,9 @@ function applyEffects(effects, phoneChanges) {
   // Taso 2 = DEBUFF (-5 puhelimen omaan mittariin)
   // Taso 3 = KRIISI (-12 puhelimen omaan mittariin + pakkokortti)
   const phoneCfg = {
-    east:   { meter: 'turva',  buff: 5, debuff2: -5, debuff3: -12 },
-    west:   { meter: 'sopu',   buff: 5, debuff2: -5, debuff3: -12 },
-    market: { meter: 'kassa',  buff: 5, debuff2: -5, debuff3: -12 },
+    east:   { meter: 'turva',  buff: 3, debuff2: -3, debuff3: -6 },
+    west:   { meter: 'sopu',   buff: 3, debuff2: -3, debuff3: -6 },
+    market: { meter: 'kassa',  buff: 3, debuff2: -3, debuff3: -6 },
   };
 
   const delta = { kannatus: 0, kassa: 0, sopu: 0, turva: 0 };
@@ -2589,7 +2589,7 @@ function updateHUD() {
 }
 
 function updatePhones() {
-  const levels = ['Buff +5 🟢', 'Neutraali', 'Kriittinen ⚠️', 'HÄLYTYS 🔴'];
+  const levels = ['Bonus 🟢', 'Neutraali', 'Kriittinen ⚠️', 'HÄLYTYS 🔴'];
   for (const [key, ph] of Object.entries(state.phones)) {
     const el = document.getElementById(`phone-${key}`);
     const statusEl = document.getElementById(`ps-${key}`);
