@@ -85,8 +85,86 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border-radius: 2px;
-    min-height: 48px;
+    min-height: 56px;
   }
+
+  /* INTRO */
+  #intro {
+    display: flex;
+    position: fixed;
+    inset: 0;
+    background: #0d0a05;
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+  }
+  #intro.hide { display: none; }
+
+  #intro-card {
+    background: var(--paper);
+    border: 2px solid #c8b890;
+    border-radius: 6px;
+    width: min(390px, 94vw);
+    padding: clamp(1.4rem, 5.5vw, 2rem);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.9);
+    outline: 1px solid #d4c4a0;
+    outline-offset: -6px;
+    text-align: center;
+  }
+
+  #intro-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    font-weight: 900;
+    color: var(--ink);
+    line-height: 1.2;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.3rem;
+  }
+
+  #intro-subtitle {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: clamp(0.65rem, 2.6vw, 0.82rem);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #8a7050;
+    margin-bottom: 1.2rem;
+    border-bottom: 1px solid #d4c8a8;
+    padding-bottom: 1rem;
+  }
+
+  #intro-rules {
+    text-align: left;
+    margin-bottom: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+  }
+
+  .rule-item {
+    font-family: 'Special Elite', serif;
+    font-size: clamp(0.8rem, 3.4vw, 0.95rem);
+    color: #2a1e10;
+    line-height: 1.4;
+  }
+
+  #intro-btn {
+    width: 100%;
+    padding: 0.85rem;
+    background: var(--ink);
+    color: var(--paper);
+    border: none;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.92rem, 4vw, 1.15rem);
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    cursor: pointer;
+    border-radius: 2px;
+    transition: background 0.2s;
+    min-height: 58px;
+  }
+  #intro-btn:active { background: #3a2912; }
 
   /* MAIN WRAPPER */
   #game {
@@ -101,7 +179,7 @@
 
   /* HUD */
   #hud {
-    padding: clamp(0.35rem, 1.5vw, 0.6rem) clamp(0.6rem, 3vw, 0.9rem) clamp(0.3rem, 1.2vw, 0.5rem);
+    padding: clamp(0.7rem, 2.5vw, 1rem) clamp(0.9rem, 3.5vw, 1.2rem) clamp(0.55rem, 2vw, 0.8rem);
     background: #110d06;
     border-bottom: 2px solid #5a3e1e;
     flex-shrink: 0;
@@ -110,19 +188,19 @@
   #hud-title {
     font-family: 'Playfair Display', serif;
     color: var(--gold);
-    font-size: clamp(0.5rem, 2vw, 0.65rem);
-    letter-spacing: 0.15em;
+    font-size: clamp(0.75rem, 3vw, 1rem);
+    letter-spacing: 0.18em;
     text-transform: uppercase;
     text-align: center;
-    margin-bottom: clamp(0.25rem, 1vw, 0.4rem);
-    opacity: 0.6;
+    margin-bottom: clamp(0.45rem, 1.5vw, 0.65rem);
+    opacity: 0.7;
   }
 
   .meters-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: clamp(0.2rem, 0.8vw, 0.3rem) clamp(0.5rem, 2vw, 0.8rem);
-    margin-bottom: clamp(0.2rem, 0.8vw, 0.35rem);
+    gap: clamp(0.35rem, 1.2vw, 0.5rem) clamp(0.7rem, 3vw, 1.1rem);
+    margin-bottom: clamp(0.35rem, 1.2vw, 0.55rem);
   }
 
   .meter { display: flex; flex-direction: column; gap: 0.12rem; }
@@ -131,8 +209,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: clamp(0.5rem, 2vw, 0.6rem);
-    letter-spacing: 0.04em;
+    font-size: clamp(0.68rem, 2.6vw, 0.82rem);
+    letter-spacing: 0.05em;
     text-transform: uppercase;
   }
 
@@ -140,7 +218,7 @@
 
 
   .meter-bar {
-    height: clamp(4px, 1vw, 6px);
+    height: clamp(6px, 1.5vw, 9px);
     background: #2a1e0e;
     border-radius: 2px;
     overflow: hidden;
@@ -171,7 +249,7 @@
     min-height: 1.2rem;
   }
   .status-icon {
-    font-size: clamp(0.7rem, 2.8vw, 0.9rem);
+    font-size: clamp(0.85rem, 3.2vw, 1.05rem);
     opacity: 0;
     transition: opacity 0.4s, transform 0.4s;
     transform: scale(0.6);
@@ -198,55 +276,58 @@
     50%       { filter: brightness(1.5); }
   }
 
-  /* PP Row */
+  /* PP Row — kaikki palkit samassa linjassa */
   #pp-row {
     display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    margin-top: clamp(0.15rem, 0.6vw, 0.25rem);
+    align-items: flex-end;
+    gap: 0.45rem;
+    margin-top: clamp(0.35rem, 1.2vw, 0.5rem);
   }
 
-  #pp-label {
-    color: #a08060;
-    font-size: clamp(0.5rem, 2vw, 0.6rem);
-    letter-spacing: 0.05em;
+  .bar-col {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.18rem;
+    flex: 1;
+  }
+
+  #pp-col { flex: 0 0 auto; }
+
+  .bar-label {
+    font-size: clamp(0.5rem, 2vw, 0.62rem);
+    letter-spacing: 0.1em;
     text-transform: uppercase;
-    flex-shrink: 0;
+    color: #6a5030;
+    white-space: nowrap;
+    line-height: 1;
   }
 
-  #pp-dots { display: flex; gap: 0.28rem; }
+  #pp-dots {
+    display: flex;
+    gap: 0.28rem;
+    align-items: center;
+    height: 8px;
+  }
 
   .pp-dot {
-    width: clamp(10px, 3vw, 14px);
-    height: clamp(10px, 3vw, 14px);
+    width: clamp(10px, 3vw, 13px);
+    height: clamp(10px, 3vw, 13px);
     border-radius: 50%;
     border: 1.5px solid var(--gold);
     background: transparent;
     transition: background 0.3s;
+    flex-shrink: 0;
   }
   .pp-dot.filled { background: var(--gold); }
 
-  #term-bar {
-    margin-left: auto;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-end;
-    gap: 0.15rem;
-    min-width: clamp(60px, 20vw, 90px);
-  }
-  #term-label {
-    font-size: clamp(0.42rem, 1.8vw, 0.52rem);
-    letter-spacing: 0.12em;
-    color: #6a5030;
-    text-transform: uppercase;
-  }
+  #term-bar { flex: 1.5; }
   #term-track {
     width: 100%;
-    height: 6px;
+    height: 8px;
     background: #2a1e0e;
     border-radius: 3px;
     overflow: hidden;
-    position: relative;
   }
   #term-fill {
     height: 100%;
@@ -258,12 +339,21 @@
 
   /* Velka-hohto */
   #debt-glow {
-    flex: 1;
-    height: 6px;
+    width: 100%;
+    height: 8px;
     border-radius: 3px;
     background: transparent;
     transition: background 1.5s ease, box-shadow 1.5s ease;
-    margin: 0 0.3rem;
+  }
+  #debt-label {
+    font-size: clamp(0.5rem, 2vw, 0.62rem);
+    letter-spacing: 0.1em;
+    color: #6a5030;
+    text-transform: uppercase;
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 1.5s ease, color 1.5s ease;
+    line-height: 1;
   }
 
   /* DESK */
@@ -300,7 +390,7 @@
   #card {
     background: var(--paper);
     border-radius: clamp(6px, 2vw, 10px);
-    padding: clamp(0.7rem, 3vw, 1rem) clamp(0.65rem, 2.8vw, 0.95rem);
+    padding: clamp(0.85rem, 3.5vw, 1.15rem) clamp(0.8rem, 3.2vw, 1.1rem);
     box-shadow:
       0 12px 40px rgba(0,0,0,0.75),
       0 3px 10px rgba(0,0,0,0.5),
@@ -325,7 +415,7 @@
   }
 
   #card-category {
-    font-size: clamp(0.45rem, 1.8vw, 0.55rem);
+    font-size: clamp(0.55rem, 2.2vw, 0.68rem);
     letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #8a7050;
@@ -335,7 +425,7 @@
 
   #card-character {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(0.78rem, 3.2vw, 0.95rem);
+    font-size: clamp(0.9rem, 3.8vw, 1.1rem);
     font-weight: 700;
     color: var(--ink);
     margin-bottom: 0.2rem;
@@ -345,7 +435,7 @@
 
   #card-portrait {
     width: 100%;
-    height: clamp(55px, 16vw, 80px);
+    height: clamp(62px, 18vw, 90px);
     flex-shrink: 0;
     background: #e0d8c4;
     border: 1px solid #c0b090;
@@ -353,15 +443,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: clamp(2rem, 8vw, 2.8rem);
+    font-size: clamp(2.4rem, 9vw, 3.2rem);
     border-radius: 2px;
     overflow: hidden;
   }
 
   #card-text {
     font-family: 'Special Elite', serif;
-    font-size: clamp(0.62rem, 2.6vw, 0.75rem);
-    line-height: 1.45;
+    font-size: clamp(0.72rem, 3vw, 0.88rem);
+    line-height: 1.48;
     color: #2a1e10;
     border-top: 1px solid #d4c8a8;
     padding-top: 0.35rem;
@@ -372,7 +462,7 @@
     display: flex;
     justify-content: space-between;
     gap: 0.4rem;
-    font-size: clamp(0.52rem, 2.2vw, 0.62rem);
+    font-size: clamp(0.62rem, 2.6vw, 0.75rem);
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
@@ -455,9 +545,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 0.15rem;
+    gap: 0.22rem;
     cursor: pointer;
-    padding: clamp(0.3rem, 1.2vw, 0.45rem) clamp(0.4rem, 2vw, 0.7rem);
+    padding: clamp(0.4rem, 1.6vw, 0.6rem) clamp(0.5rem, 2.2vw, 0.85rem);
     border-radius: 4px;
     transition: background 0.2s;
     flex: 1;
@@ -467,7 +557,7 @@
   .phone:active { background: rgba(255,255,255,0.1); }
 
   .phone-icon {
-    font-size: clamp(1.2rem, 5vw, 1.5rem);
+    font-size: clamp(1.4rem, 5.5vw, 1.8rem);
     transition: transform 0.1s;
   }
 
@@ -480,12 +570,12 @@
   }
 
   .phone-name {
-    font-size: clamp(0.48rem, 2vw, 0.58rem);
-    letter-spacing: 0.06em;
+    font-size: clamp(0.58rem, 2.4vw, 0.72rem);
+    letter-spacing: 0.07em;
     text-transform: uppercase;
     font-weight: 600;
   }
-  .phone-status { font-size: clamp(0.45rem, 1.8vw, 0.55rem); letter-spacing: 0.03em; }
+  .phone-status { font-size: clamp(0.54rem, 2.2vw, 0.66rem); letter-spacing: 0.03em; }
 
   .phone.level-0 .phone-name   { color: #2ecc71; }
   .phone.level-0 .phone-status { color: #27ae60; }
@@ -501,7 +591,7 @@
     position: fixed;
     top: 0.8rem;
     left: 50%;
-    transform: translateX(-50%) translateY(-4rem);
+    transform: translateX(-50%) translateY(calc(-100% - 1.5rem));
     background: #1a1208;
     border: 1px solid var(--gold);
     color: var(--gold);
@@ -518,28 +608,15 @@
   #notification.show { transform: translateX(-50%) translateY(0); }
 
   /* Committee bars */
-  #committees-row {
-    display: flex;
-    gap: 0.4rem;
-    margin-top: clamp(0.15rem, 0.6vw, 0.25rem);
-  }
-  .committee-slot {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 0.12rem;
+  #cslot-0, #cslot-1 {
     opacity: 0.25;
     transition: opacity 0.3s;
   }
-  .committee-slot.active { opacity: 1; }
-  .committee-label {
-    font-size: clamp(0.42rem, 1.8vw, 0.52rem);
-    letter-spacing: 0.1em;
-    color: #5588aa;
-    text-transform: uppercase;
-  }
+  #cslot-0.active, #cslot-1.active { opacity: 1; }
+  .committee-label { color: #5588aa !important; }
   .committee-track {
-    height: 6px;
+    width: 100%;
+    height: 8px;
     background: #2a1e0e;
     border-radius: 3px;
     overflow: hidden;
@@ -573,8 +650,8 @@
     background: var(--paper);
     border: 1px solid #c8b890;
     border-radius: 4px;
-    width: min(320px, 92vw);
-    padding: clamp(0.8rem, 4vw, 1.2rem);
+    width: min(380px, 94vw);
+    padding: clamp(1rem, 4.5vw, 1.5rem);
     box-shadow: 0 8px 32px rgba(0,0,0,0.7);
     animation: feedbackIn 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
     max-height: 85dvh;
@@ -590,21 +667,21 @@
 
   #feedback-headline {
     font-family: 'Playfair Display', serif;
-    font-size: clamp(0.9rem, 4vw, 1.05rem);
+    font-size: clamp(1.05rem, 4.5vw, 1.3rem);
     font-weight: 700;
     color: var(--ink);
-    margin-bottom: 0.45rem;
+    margin-bottom: 0.6rem;
     line-height: 1.3;
     border-bottom: 1px solid #d4c8a8;
-    padding-bottom: 0.45rem;
+    padding-bottom: 0.6rem;
   }
 
   #feedback-body {
     font-family: 'Special Elite', serif;
-    font-size: clamp(0.72rem, 3vw, 0.8rem);
+    font-size: clamp(0.82rem, 3.4vw, 0.95rem);
     line-height: 1.55;
     color: #2a1e10;
-    margin-bottom: 0.7rem;
+    margin-bottom: 0.9rem;
   }
 
   #feedback-effects {
@@ -616,8 +693,8 @@
 
   .effect-pill {
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 0.6rem;
-    padding: 0.2rem 0.5rem;
+    font-size: 0.72rem;
+    padding: 0.25rem 0.6rem;
     border-radius: 2px;
     font-weight: 600;
     letter-spacing: 0.05em;
@@ -628,18 +705,18 @@
 
   #feedback-next {
     width: 100%;
-    padding: 0.75rem;
+    padding: 0.9rem;
     background: var(--ink);
     color: var(--paper);
     border: none;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: clamp(0.65rem, 2.8vw, 0.75rem);
+    font-size: clamp(0.75rem, 3.2vw, 0.9rem);
     letter-spacing: 0.1em;
     text-transform: uppercase;
     cursor: pointer;
     border-radius: 2px;
     transition: background 0.2s;
-    min-height: 48px;
+    min-height: 54px;
   }
   #feedback-next:active { background: #3a2912; }
 </style>
@@ -653,7 +730,23 @@
   <h1>HALLITUS KAATUI</h1>
   <div id="gameover-reason">Vaalikelvottomaksi todettu</div>
   <div id="gameover-stats"></div>
-  <button id="restart-btn" onclick="initGame()">↺ Uusi vaalikausi</button>
+  <button id="restart-btn" onclick="initGame(); document.getElementById('intro').classList.remove('hide')">↺ Uusi vaalikausi</button>
+</div>
+
+<div id="intro">
+  <div id="intro-card">
+    <div id="intro-title">ARKADIANMÄEN<br>SELVIYTYJÄT</div>
+    <div id="intro-subtitle">Poliittinen selviytymispeli</div>
+    <div id="intro-rules">
+      <div class="rule-item">🎴 Pyyhkäise kortteja vasemmalle tai oikealle tehdäksesi päätöksiä</div>
+      <div class="rule-item">📈 Pidä neljä mittaria elossa — kannatus, kassa, sopu ja turva</div>
+      <div class="rule-item">☎️ Puhelimet hälyttävät — reagoi ennen kuin kriisi eskaloituu</div>
+      <div class="rule-item">⬆️ Mestarin veto yhdistää parhaat puolet (3 PP)</div>
+      <div class="rule-item">⬇️ Työryhmä hautaa päätöksen hetkeksi (1 PP)</div>
+      <div class="rule-item">🗓️ Selviä 48 kuukauden vaalikausi loppuun</div>
+    </div>
+    <button id="intro-btn" onclick="startGame()">HALLITUS MUODOSTETTU</button>
+  </div>
 </div>
 
 <div id="game">
@@ -692,30 +785,31 @@
       </div>
     </div>
     <div id="pp-row">
-      <span id="pp-label">PP</span>
-      <div id="pp-dots">
-        <div class="pp-dot filled" id="pp0"></div>
-        <div class="pp-dot filled" id="pp1"></div>
-        <div class="pp-dot filled" id="pp2"></div>
-        <div class="pp-dot" id="pp3"></div>
-        <div class="pp-dot" id="pp4"></div>
-      </div>
-      <div id="debt-glow"></div>
-      <div id="term-bar">
-        <div id="term-label">VAALIKAUSI</div>
-        <div id="term-track">
-          <div id="term-fill"></div>
+      <div class="bar-col" id="pp-col">
+        <div class="bar-label">PP</div>
+        <div id="pp-dots">
+          <div class="pp-dot filled" id="pp0"></div>
+          <div class="pp-dot filled" id="pp1"></div>
+          <div class="pp-dot filled" id="pp2"></div>
+          <div class="pp-dot" id="pp3"></div>
+          <div class="pp-dot" id="pp4"></div>
         </div>
       </div>
-      <div id="committees-row">
-        <div class="committee-slot" id="cslot-0">
-          <div class="committee-label">TYÖRYHMÄ</div>
-          <div class="committee-track"><div class="committee-fill" id="cfill-0"></div></div>
-        </div>
-        <div class="committee-slot" id="cslot-1">
-          <div class="committee-label">TYÖRYHMÄ</div>
-          <div class="committee-track"><div class="committee-fill" id="cfill-1"></div></div>
-        </div>
+      <div class="bar-col" id="debt-col">
+        <div class="bar-label" id="debt-label">VALTIONVELKA</div>
+        <div id="debt-glow"></div>
+      </div>
+      <div class="bar-col" id="cslot-0">
+        <div class="bar-label committee-label">TYÖRYHMÄ</div>
+        <div class="committee-track"><div class="committee-fill" id="cfill-0"></div></div>
+      </div>
+      <div class="bar-col" id="cslot-1">
+        <div class="bar-label committee-label">TYÖRYHMÄ</div>
+        <div class="committee-track"><div class="committee-fill" id="cfill-1"></div></div>
+      </div>
+      <div class="bar-col" id="term-bar">
+        <div class="bar-label" id="term-label">VAALIKAUSI</div>
+        <div id="term-track"><div id="term-fill"></div></div>
       </div>
     </div>
   </div>
@@ -806,13 +900,45 @@ function initGame() {
     startY: 0,
     currentX: 0,
     gameOver: false,
+    _committeePending: [],
   };
 
   document.getElementById('gameover').classList.remove('show');
+  document.getElementById('feedback-panel').classList.remove('show');
+
+  // Nollaa työryhmäpalkit eksplisiittisesti
+  for (let i = 0; i < 2; i++) {
+    const slotEl = document.getElementById(`cslot-${i}`);
+    const fillEl = document.getElementById(`cfill-${i}`);
+    if (slotEl) slotEl.classList.remove('active');
+    if (fillEl) fillEl.style.width = '0%';
+  }
+
+  // Nollaa status-ikonit
+  ['st-lakkoaalto','st-mediaajojahti','st-vaalikuume'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.classList.remove('active');
+  });
+
+  // Nollaa vaalikausi- ja velkapalkki
+  document.getElementById('term-fill').style.width = '2%';
+  const dg = document.getElementById('debt-glow');
+  if (dg) { dg.style.background = 'transparent'; dg.style.boxShadow = 'none'; }
+  const dl = document.getElementById('debt-label');
+  if (dl) dl.style.opacity = '0';
+
   updateHUD();
   updatePhones();
+  // Älä lataa korttia suoraan — startGame tekee sen
+}
+
+function startGame() {
+  document.getElementById('intro').classList.add('hide');
+  if (!window._dragSetup) {
+    setupCardDrag();
+    window._dragSetup = true;
+  }
   drawCard();
-  setupCardDrag();
 }
 
 // ═══════════════════════════════════════
@@ -1132,7 +1258,311 @@ const CARDS = [
       right: { kannatus: 12, kassa: -12, sopu: 8, turva: 0, phone: {}, velka: 3 }
     }
   },
+,
+  // ── LAKKOAALTO-KORTIT ──
+  {
+    id: 'c31', category: 'TYÖELÄMÄ', emoji: '🚢',
+    character: 'Satamatyöläisten liitto, luottamusmies Järvinen',
+    text: '"Satamat seisahtuvat ensi tiistaina ellei hallitus peru satamatyön ulkoistamissuunnitelmia. Vienti pysähtyy kolmessa päivässä."',
+    leftLabel: 'Ulkoistukset jatkuu', rightLabel: 'Peru ulkoistukset',
+    effects: {
+      left:  { kannatus: -12, kassa: 5, sopu: -10, turva: -8, phone: { market: 1 }, triggerEffect: 'lakkoaalto' },
+      right: { kannatus: 10, kassa: -10, sopu: 8, turva: 0, phone: {}, resolveEffect: 'lakkoaalto' }
+    }
+  },
+  {
+    id: 'c32', category: 'TYÖELÄMÄ', emoji: '🏗️',
+    character: 'Rakennusliitto ry, puheenjohtaja Mäkinen',
+    text: '"Rakennustyömaiden turvallisuusstandardit ovat vaarantuneet säästöpaineiden takia. Vaadimme pakollisia tarkastuksia tai julistamme työtaistelun."',
+    leftLabel: 'Ei pakollisia', rightLabel: 'Hyväksy tarkastukset',
+    effects: {
+      left:  { kannatus: -8, kassa: 3, sopu: -12, turva: -10, phone: {}, triggerEffect: 'lakkoaalto' },
+      right: { kannatus: 8, kassa: -8, sopu: 10, turva: 12, phone: {}, resolveEffect: 'lakkoaalto' }
+    }
+  },
+  {
+    id: 'c33', category: 'KRIISI', emoji: '🚌',
+    character: 'HSL:n bussinkuljettajat (lakossa)',
+    text: 'Helsinki seisoo. Bussit eivät kulje, metro myöhässä. Oppositio vaatii välikysymystä. Kaupunginjohtaja soittaa joka tunti.',
+    leftLabel: 'Anna lakon jatkua', rightLabel: 'Välitä sopimus',
+    effects: {
+      left:  { kannatus: -15, kassa: -5, sopu: -8, turva: -5, phone: {} },
+      right: { kannatus: 5, kassa: -12, sopu: 5, turva: 5, phone: {}, resolveEffect: 'lakkoaalto' }
+    }
+  },
+  {
+    id: 'c34', category: 'TYÖELÄMÄ', emoji: '👩‍⚕️',
+    character: 'Tehy ry, puheenjohtaja Korhonen',
+    text: '"Hoitajat ovat äärirajoilla. Ellei hallitus sitoudu hoitajamitoituksen rahoittamiseen, julistamme hoitoalan lakon — kaikki yksiköt."',
+    leftLabel: 'Ei lisärahoitusta', rightLabel: 'Sitoudu rahoitukseen',
+    effects: {
+      left:  { kannatus: -18, kassa: 5, sopu: -10, turva: -15, phone: {}, triggerEffect: 'lakkoaalto' },
+      right: { kannatus: 15, kassa: -18, sopu: 8, turva: 15, phone: {}, velka: 6, resolveEffect: 'lakkoaalto' }
+    }
+  },
+  {
+    id: 'c35', category: 'NEUVOTTELU', emoji: '🤜',
+    character: 'EK ja SAK yhteisneuvottelussa',
+    text: '"Työnantajat ja -tekijät ovat pattitilanteessa. Molemmat pyytävät hallituksen väliintuloa. Sinulla on 24 tuntia."',
+    leftLabel: 'Älä puutu', rightLabel: 'Kutsu neuvottelu',
+    effects: {
+      left:  { kannatus: -10, kassa: -5, sopu: -15, turva: 0, phone: { market: 1 }, triggerEffect: 'lakkoaalto' },
+      right: { kannatus: 8, kassa: -8, sopu: 12, turva: 0, phone: { market: -1 }, resolveEffect: 'lakkoaalto' }
+    }
+  },
+  // ── MEDIA-AJOJAHTI-KORTIT ──
+  {
+    id: 'c36', category: 'SKANDAALI', emoji: '📸',
+    character: 'Iltasanomat, politiikan toimitus',
+    text: '"Olemme saaneet kuvan hallituspuolueen ministerin gaalaillalliselta — samana päivänä kun leikkaukset julkistettiin. Kommentti?"',
+    leftLabel: 'Ei kommenttia', rightLabel: 'Pyydä anteeksi',
+    effects: {
+      left:  { kannatus: -12, kassa: 0, sopu: -5, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 4 },
+      right: { kannatus: -5, kassa: 0, sopu: 5, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c37', category: 'SOME', emoji: '🔥',
+    character: 'Twitter/X — #PääministeriSelitä trendinä',
+    text: 'Hashtagisi on noussut Suomen trendien kärkeen. Syy: vanha haastattelu jossa sanoit jotain joka kuulostaa nyt aivan muulta kuin tarkoitit.',
+    leftLabel: 'Jätä huomiotta', rightLabel: 'Julkaise selvennys',
+    effects: {
+      left:  { kannatus: -15, kassa: 0, sopu: -5, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 3 },
+      right: { kannatus: 5, kassa: -2, sopu: 3, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c38', category: 'MEDIA', emoji: '📺',
+    character: 'MOT-toimitus, Yle',
+    text: '"Olemme tutkineet hallituksen konsulttikuluja kuusi kuukautta. Ohjelma esitetään torstaina. Haluatteko etukäteen tilaisuuden vastata?"',
+    leftLabel: 'Kieltäydy', rightLabel: 'Anna haastattelu',
+    effects: {
+      left:  { kannatus: -18, kassa: 0, sopu: -8, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 5 },
+      right: { kannatus: -5, kassa: 0, sopu: 5, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c39', category: 'SKANDAALI', emoji: '📧',
+    character: 'Anonyymi lähde, kaikille toimituksille',
+    text: 'Hallituksen sisäinen sähköpostiketju on vuodettu medialle. Se sisältää riitatuokion jossa käytetään sanoja joita ei pitäisi käyttää kokouksissa.',
+    leftLabel: 'Kiistä autenttisuus', rightLabel: 'Myönnä ja selitä',
+    effects: {
+      left:  { kannatus: -20, kassa: 0, sopu: -12, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 4 },
+      right: { kannatus: -8, kassa: 0, sopu: 5, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c40', category: 'PR', emoji: '🎙️',
+    character: 'Viestintäpäällikkö Salminen (oma väki)',
+    text: '"Meillä on mahdollisuus tehdä iso positiivinen uutinen huomenna — mutta se vaatii että julkistamme keskeneräisen hankkeen ennenaikaisesti. Riski on kova."',
+    leftLabel: 'Odota valmista', rightLabel: 'Julkista nyt',
+    effects: {
+      left:  { kannatus: 3, kassa: 0, sopu: 3, turva: 0, phone: {} },
+      right: { kannatus: 15, kassa: -5, sopu: -5, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 3 }
+    }
+  },
 
+  // ── UUDET 20 KORTTIA ──
+  {
+    id: 'c41', category: 'TALOUS', emoji: '🧾',
+    character: 'Verohallinnon pääjohtaja Nieminen',
+    text: '"Arvonlisäveron korottaminen yhdellä prosentilla toisi 800 miljoonaa kassaan. Kukaan ei pidä siitä, mutta kaikki tekevät sen."',
+    leftLabel: 'Ei korotuksia', rightLabel: 'Korotetaan ALV',
+    effects: {
+      left:  { kannatus: 8, kassa: -10, sopu: 3, turva: 0, phone: { market: 1 }, velka: 2 },
+      right: { kannatus: -12, kassa: 15, sopu: -5, turva: 0, phone: { market: -1 } }
+    }
+  },
+  {
+    id: 'c42', category: 'KULTTUURI', emoji: '🎭',
+    character: 'Yleisradion toimitusjohtaja Leinonen',
+    text: '"Yle tarvitsee 80 miljoonan lisärahoituksen. Vaihtoehtoisesti voimme lopettaa kaikki draamatuotannot ja lähettää vain säätiedotuksia."',
+    leftLabel: 'Säätiedotukset riittävät', rightLabel: 'Rahoita Yle',
+    effects: {
+      left:  { kannatus: -10, kassa: 5, sopu: -8, turva: 0, phone: {} },
+      right: { kannatus: 8, kassa: -10, sopu: 5, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c43', category: 'YMPÄRISTÖ', emoji: '🌊',
+    character: 'Ilmastopaneelin puheenjohtaja Vesanen',
+    text: '"Itämeri on kriittisessä tilassa. Ehdotan maatalouden typpipäästöille heti 40%:n pakkovähennystä. Maanviljelijät tulevat protestoimaan — mutta järven kalat ovat kiitollisia."',
+    leftLabel: 'Ei pakkovähennystä', rightLabel: 'Hyväksy päästörajoite',
+    effects: {
+      left:  { kannatus: 5, kassa: 5, sopu: -5, turva: 0, phone: { west: 1 } },
+      right: { kannatus: -8, kassa: -8, sopu: -10, turva: 5, phone: { west: -1 } }
+    }
+  },
+  {
+    id: 'c44', category: 'SISÄPOLITIIKKA', emoji: '🍺',
+    character: 'Ravintola-alan liitto, puheenjohtaja Koivisto',
+    text: '"Alkoholiveroa ei saa korottaa. Viimeksi kun tehtiin niin, suomalaiset hakivat viinansa Virosta. Viro kiittää, Suomi ei."',
+    leftLabel: 'Korotetaan veroa', rightLabel: 'Jätetään ennalleen',
+    effects: {
+      left:  { kannatus: -8, kassa: 5, sopu: -5, turva: 0, phone: {}, velka: -1 },
+      right: { kannatus: 10, kassa: -3, sopu: 5, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c45', category: 'LIIKENNE', emoji: '🚂',
+    character: 'Väyläviraston ylijohtaja Lahtinen',
+    text: '"Helsinki-Tampere-rata on pahasti ylikuormittunut. Uusi raidehanke maksaa 3 miljardia ja valmistuu 2041, mikäli kaikki menee täsmälleen suunnitelmien mukaan. Se ei mene."',
+    leftLabel: 'Ei uusia ratoja', rightLabel: 'Hyväksy hanke',
+    effects: {
+      left:  { kannatus: -5, kassa: 8, sopu: -5, turva: 0, phone: {} },
+      right: { kannatus: 8, kassa: -15, sopu: 5, turva: 5, phone: {}, velka: 10 }
+    }
+  },
+  {
+    id: 'c46', category: 'ULKOPOLITIIKKA', emoji: '🇺🇸',
+    character: 'Yhdysvaltain suurlähettiläs Johnson',
+    text: '"Washington odottaa Suomelta selkeämpää sitoutumista puolustusmenojen kasvattamiseen. 2% BKT:sta on minimi. Huomatkaa, sanoin minimi."',
+    leftLabel: 'Emme nosta tavoitetta', rightLabel: 'Sitoudutaan 2,5%:iin',
+    effects: {
+      left:  { kannatus: 5, kassa: 8, sopu: 0, turva: -15, phone: { west: 2 } },
+      right: { kannatus: -5, kassa: -18, sopu: 5, turva: 18, phone: { west: -1 } }
+    }
+  },
+  {
+    id: 'c47', category: 'SOME', emoji: '🤳',
+    character: 'Viestintätoimisto Digitaali&Teko Oy',
+    text: '"Pääministerin TikTok-tili voisi tavoittaa 18-25-vuotiaat äänestäjät. Teemme teille ensimmäisen videon: tanssitte toimistossanne. Kaikkien muiden pääministerit tekevät tätä."',
+    leftLabel: 'Ei tanssita', rightLabel: 'Tehdään video',
+    effects: {
+      left:  { kannatus: 3, kassa: 0, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: 12, kassa: -3, sopu: 3, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 2 }
+    }
+  },
+  {
+    id: 'c48', category: 'KRIISI', emoji: '🐺',
+    character: 'Riistakeskuksen johtaja Hirvonen',
+    text: '"Susilauma on syönyt kahdeksan lammasta Pohjanmaalla. Maanviljelijät vaativat kaatolupia. Luontoaktivistit ketjuuntuvat metsäministeriön ovelle. Molemmat soittavat sinulle."',
+    leftLabel: 'Myönnä kaatolupia', rightLabel: 'Suojellaan sudet',
+    effects: {
+      left:  { kannatus: 5, kassa: 0, sopu: -8, turva: 3, phone: {} },
+      right: { kannatus: -5, kassa: 0, sopu: -8, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c49', category: 'HALLINTO', emoji: '📋',
+    character: 'Valtioneuvoston kansliapäällikkö Rantanen',
+    text: '"Ministeriöiden välinen tiedonkulku on täysin rikki. Ehdotan uutta yhteistä digitaalista alustaa. Hinta: 45 miljoonaa. Arvioitu käyttöönotto: 2029. Käyttäjiä ensimmäisenä vuonna: 12."',
+    leftLabel: 'Ei uusia järjestelmiä', rightLabel: 'Tilaa järjestelmä',
+    effects: {
+      left:  { kannatus: 0, kassa: 3, sopu: -5, turva: -3, phone: {} },
+      right: { kannatus: 3, kassa: -15, sopu: 5, turva: 5, phone: {} }
+    }
+  },
+  {
+    id: 'c50', category: 'KANSAINVÄLINEN', emoji: '🏆',
+    character: 'Suomen Olympiakomitea, puheenjohtaja Mäkinen',
+    text: '"Suomi haluaa hakea vuoden 2036 olympialaisia. Se maksaa pelkästään hakuprosessina 20 miljoonaa, ja voittaminen olisi suurempi yllätys kuin Paavo Nurmi nuorena."',
+    leftLabel: 'Ei olympiahakua', rightLabel: 'Haetaan olympialaisia',
+    effects: {
+      left:  { kannatus: -3, kassa: 3, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: 15, kassa: -12, sopu: 8, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c51', category: 'TURVALLISUUS', emoji: '🕵️',
+    character: 'Suojelupoliisin päällikkö Hakkarainen',
+    text: '"Olemme löytäneet viitteitä siitä, että yksi hallituksen avustajista saattaa olla ulkomainen agentti. Ei varmistettu, mutta epäily on vakava. Haluatteko tietää nimen?"',
+    leftLabel: 'En halua tietää', rightLabel: 'Kerro nimi',
+    effects: {
+      left:  { kannatus: 0, kassa: 0, sopu: -5, turva: -12, phone: { east: 1 } },
+      right: { kannatus: -5, kassa: -3, sopu: -10, turva: 8, phone: { east: -1 } }
+    }
+  },
+  {
+    id: 'c52', category: 'TALOUS', emoji: '🏠',
+    character: 'Asuntoministeri Virtanen',
+    text: '"Asuntojen hinnat Helsingissä ovat laskeneet 22%. Rakennusyhtiöt vaativat valtiontakauksia. Vuokralaiset iloitsevat. Omistajat itkevät. Poliitikot omistajat tai vuokralaisina: molempia."',
+    leftLabel: 'Ei takauksia', rightLabel: 'Myönnä takaukset',
+    effects: {
+      left:  { kannatus: -5, kassa: 5, sopu: -5, turva: 0, phone: { market: 1 } },
+      right: { kannatus: 8, kassa: -12, sopu: 5, turva: 0, phone: { market: -1 }, velka: 5 }
+    }
+  },
+  {
+    id: 'c53', category: 'KULTTUURI', emoji: '⛪',
+    character: 'Arkkipiispa Lehtinen',
+    text: '"Kirkko haluaa olla mukana maahanmuuttajien kotouttamisessa. Vastineeksi toivomme hallituksen tukevan kirkollisverotuksen säilyttämistä. Jumala katsoo. Ja äänestää."',
+    leftLabel: 'Kiitos, ei kiitos', rightLabel: 'Hyväksy yhteistyö',
+    effects: {
+      left:  { kannatus: -5, kassa: 3, sopu: -5, turva: 0, phone: {} },
+      right: { kannatus: 8, kassa: -5, sopu: 8, turva: 5, phone: {} }
+    }
+  },
+  {
+    id: 'c54', category: 'KRIISI', emoji: '🌡️',
+    character: 'Sääpalvelun johtava meteorologi Karjalainen',
+    text: '"Heinäkuun helleaalto on tappava — 38 astetta viikon ajan. Vanhukset, lapset ja tietoliikenneyhteydet ovat vaarassa. Tarvitsemme hätärahoituksen 4 tunnissa."',
+    leftLabel: 'Normaalit prosessit', rightLabel: 'Avaa hätärahasto',
+    effects: {
+      left:  { kannatus: -15, kassa: 3, sopu: -8, turva: -18, phone: {} },
+      right: { kannatus: 12, kassa: -15, sopu: 5, turva: 15, phone: {} }
+    }
+  },
+  {
+    id: 'c55', category: 'HALLITUSPUOLUE', emoji: '💬',
+    character: 'Koalitiopuolueen puheenjohtaja Heinonen',
+    text: '"Puolueemme kannattajat ovat hämmentyneitä. Olemme hallituksessa mutta emme näy missään. Haluamme yhden suuren uudistuksen nimissämme. Haluamme sen nyt. Kirjoitamme nimen itse."',
+    leftLabel: 'Ette saa uudistusta', rightLabel: 'Neuvotellaan uudistus',
+    effects: {
+      left:  { kannatus: -5, kassa: 3, sopu: -18, turva: 0, phone: {} },
+      right: { kannatus: 8, kassa: -10, sopu: 15, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c56', category: 'TEKNOLOGIA', emoji: '🤖',
+    character: 'Digiministeri Lähteenmäki',
+    text: '"Viro käyttää jo tekoälyä kaikkeen. Me käytämme vielä faksia. Ehdotan 200 miljoonan AI-strategiaa. Se sisältää chatbotin joka vastaa kansalaiskirjeisiin. Ehkä paremmin kuin osa ministereistä."',
+    leftLabel: 'Faksit riittävät', rightLabel: 'Hyväksy AI-strategia',
+    effects: {
+      left:  { kannatus: -5, kassa: 5, sopu: -3, turva: -5, phone: { west: 1 } },
+      right: { kannatus: 10, kassa: -15, sopu: 5, turva: 8, phone: { west: -1 }, velka: 5 }
+    }
+  },
+  {
+    id: 'c57', category: 'OPPOSITIO', emoji: '📣',
+    character: 'Vasemmistoliiton puheenjohtaja Tamminen',
+    text: '"Vaadimme 35-tuntista työviikkoa. Se lisää tuottavuutta, vähentää sairaslomia ja tarkoittaa, että toimittajat voivat kirjoittaa pidemmät jutut teidän virheistänne."',
+    leftLabel: 'Ei lyhemmälle viikolle', rightLabel: 'Käynnistetään selvitys',
+    effects: {
+      left:  { kannatus: -8, kassa: 5, sopu: -12, turva: 0, phone: {} },
+      right: { kannatus: 8, kassa: -8, sopu: 10, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'c58', category: 'MEDIA', emoji: '🗞️',
+    character: 'Helsingin Sanomien päätoimittaja Salo',
+    text: '"Olemme päättäneet julkaista pääkirjoituksen jossa vaadimme hallituksenne eroa. Haluamme antaa teille oikeuden vastineeseen. Vastineelle on tilaa 300 sanaa. Kirjoittakaa tiivisti."',
+    leftLabel: 'Kirjoitamme vastineen', rightLabel: 'Emme kommentoi',
+    effects: {
+      left:  { kannatus: 5, kassa: 0, sopu: 5, turva: 0, phone: {} },
+      right: { kannatus: -15, kassa: 0, sopu: -8, turva: 0, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 3 }
+    }
+  },
+  {
+    id: 'c59', category: 'HYVINVOINTI', emoji: '👶',
+    character: 'Väestöliiton toiminnanjohtaja Koskinen',
+    text: '"Syntyvyys on laskenut historialliselle minimille. Ehdotamme lapsilisien kaksinkertaistamista. Se maksaa 400 miljoonaa vuodessa ja lapset eivät synny lisää, mutta ainakin yritimme."',
+    leftLabel: 'Ei kaksinkertaisteta', rightLabel: 'Kaksinkertaistetaan',
+    effects: {
+      left:  { kannatus: -8, kassa: 5, sopu: -5, turva: 0, phone: {} },
+      right: { kannatus: 15, kassa: -18, sopu: 8, turva: 0, phone: {}, velka: 6 }
+    }
+  },
+  {
+    id: 'c60', category: 'KRIISI', emoji: '🔋',
+    character: 'Fingridin toimitusjohtaja Seppälä',
+    text: '"Sähköverkossa on tekninen vika. Puoli Suomea menee pimeäksi 4 tunnin kuluttua ellei tilannetta hallita. Hyvä uutinen: media ei tiedä vielä. Huono uutinen: kertominen alkaa nyt."',
+    leftLabel: 'Julkinen tiedotus heti', rightLabel: 'Korjataan ensin hiljaa',
+    effects: {
+      left:  { kannatus: 8, kassa: -5, sopu: 5, turva: -10, phone: {} },
+      right: { kannatus: -18, kassa: -5, sopu: -8, turva: -8, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 4 }
+    }
+  },
 ];
 
 const PHONE_CALL_CARDS = {
@@ -1284,6 +1714,129 @@ const FEEDBACK = {
     right: { headline: 'Koulutusrahoitus kasvaa', body: 'Yliopistojen hallitukset kokoontuvat hätäkokoukseen jakamaan lisärahat. Kokoukset kestävät kuukauden. Jaosta syntyy kolme erilaista valitusta. Kaikki menevät oikeusasteelle.' }
   },
 
+  // ── LAKKOAALTO + MEDIA-AJOJAHTI KORTIT ──
+  c31: {
+    left:  { headline: 'Satamat sulkeutuvat', body: 'Tiistaina kello 6:00 satamat pysähtyvät. Ensimmäinen rahtilaiva ankkuroituu Hangon edustalle. Vientiyritysten toimitusjohtajat soittavat. Puhelimesi kestää neljä päivää.' },
+    right: { headline: 'Ulkoistukset perutaan', body: 'Julkistat perumisen tiedotustilaisuudessa. Satamatyöläiset palaavat töihin. Konsulttifirma jonka palkkasin suunnittelemaan ulkoistuksia lähettää laskun. Se on iso.' }
+  },
+  c32: {
+    left:  { headline: 'Työtaistelu alkaa', body: 'Rakennustyömaat hiljenevät. 200 keskeneräistä projektia jäätyy. Yksi niistä on hallituksen lippulaivahanke jonka piti valmistua ennen vaaleja.' },
+    right: { headline: 'Tarkastukset hyväksytään', body: 'Rakennusliitto tyytyy. Työmaat pyörivät. Tarkastajia ei ole tarpeeksi, joten jonot venyvät kuukausiksi. Tämä selviää puoli vuotta myöhemmin.' }
+  },
+  c33: {
+    left:  { headline: 'Helsinki seisoo', body: 'Neljäs päivä ilman busseja. Kaupunkilaiset pyöräilevät töihin. Yksi heistä kaatuu ja päätyy etusivulle. Otsikko ei ole myötätuulinen.' },
+    right: { headline: 'Sovinto syntyy', body: 'Kutsut molemmat osapuolet Kesärantaan yökokousistuntoon. Sopimus allekirjoitetaan kello 03:47. Valokuva on väsynyt mutta voitokas.' }
+  },
+  c34: {
+    left:  { headline: 'Hoitoala lakkoon', body: 'Sairaalat toimivat hätäpalveluin. Leikkausjonot pitenevät. THL julkaisee varoituksen. Oppositio julkaisee tiedotteen. Sinä julkaiset tiedotteen tiedotteesta.' },
+    right: { headline: 'Hoitajamitoitus turvataan', body: '18 000 hoitajaa saa lupauksen. Se maksaa 240 miljoonaa. Valtiovarainministeri lähettää viestin: "Okei." Siinä kaikki. Vain "Okei."' }
+  },
+  c35: {
+    left:  { headline: 'Pattiasema jatkuu', body: 'EK ja SAK pitävät omat tiedotustilaisuutensa samanaikaisesti. Toimittajat juoksevat edestakaisin. Molemmat syyttävät hallitusta. Yhteistä on vain se.' },
+    right: { headline: 'Välityssopimus syntyy', body: 'Istut klo 22 neuvotteluhuoneessa tuplarengaskorviksen kanssa. Sopimus syntyy 2:15. Molemmat osapuolet sanovat tyytyvänsä. Tämä tarkoittaa että molemmat hävisivät.' }
+  },
+  c36: {
+    left:  { headline: 'Hiljaisuus kertoo kaiken', body: '"Ei kommenttia" on pahin mahdollinen kommentti. Kuva on seuraavan päivän etusivulla. Tekstissä lukee "Pääministerin lähipiiri juhli leikkausiltana". Teknisesti totta.' },
+    right: { headline: 'Anteeksipyyntö julkaistaan', body: 'Lyhyt, asiallinen, vilpitön. Iltapäivälehdet julkaisevat sen sivulla 12. Kuvan ne julkaisevat etusivulla vielä kolme kertaa.' }
+  },
+  c37: {
+    left:  { headline: 'Trendi kasvaa', body: 'Hashtagin alle alkaa ilmestyä lisää vanhoja haastatteluja, valokuvia ja lainauksia. Jotkut ovat aidot. Osa ei. On mahdotonta tietää kumpia jaetaan enemmän.' },
+    right: { headline: 'Selvennys julkaistaan', body: 'Kirjoitat 280 merkkiä selitystä 140 merkin lainaukseen. Seuraavaan twiittiin vastataan: "Tämäkin pitää selittää?" Sosiaalinen media on hauska paikka.' }
+  },
+  c38: {
+    left:  { headline: 'MOT esitetään torstaina', body: 'Ohjelma kestää 44 minuuttia. Sinua mainitaan 23 kertaa. Kahdeksan kertaa nimeltä, loput "hallituksen lähteet". Kaikki ovat sinä.' },
+    right: { headline: 'Haastattelu annetaan', body: 'Istut kaksi tuntia kovien kysymysten edessä. Selität, tarkennat, myönnät. Ohjelma esitetään silti torstaina. Haastattelu on siellä — 4 minuutin pätkänä.' }
+  },
+  c39: {
+    left:  { headline: 'Kiisto kostautuu', body: 'Metadata osoittaa sähköpostien olevan aitoja. Toimittaja julkaisee metadatan. Uusi otsikko: "Hallitus yritti kiistää oman sähköpostinsa." Tämä on nyt iso juttu.' },
+    right: { headline: 'Myönnytys tehdään', body: 'Myönnät että tilanne oli tulehtunut. Selität kontekstin. Osa uskoo. Ketju kiertää silti somessa viikon. Muutama lainaus irrotetaan asiayhteydestä. Klassikko.' }
+  },
+  c40: {
+    left:  { headline: 'Odotetaan', body: 'Hanke valmistuu aikataulussa kolmen kuukauden päästä. Julkistus menee hyvin. Kukaan ei muista että olisit voinut tehdä tämän aiemmin. Tai muistavat, mutta hiljaa.' },
+    right: { headline: 'Julkistus menee pieleen', body: 'Hanke on puolivalmis. Toimittajat löytävät aukot välittömästi. Positiivinen uutinen muuttuu negatiiviseksi 6 tunnissa. Viestintäpäällikkö lähettää viestin: "Pahoittelut."' }
+  },
+
+  c41: {
+    left:  { headline: 'ALV pysyy ennallaan', body: 'Kuluttajat huokaavat helpotuksesta. Valtiovarainministeri lähettää Excelissä laskentataulukon jossa sana "alijäämä" on punaisella. Punaisella kaikki solut.' },
+    right: { headline: 'Hinnat nousevat', body: 'Kaupat ilmoittavat nostavansa hintoja heti. Kuluttajaliitto pitää tiedotustilaisuuden. Yksi prosentti arvonlisäveron korotuksesta tuottaa 800 miljoonaa ja 4 miljoonaa vihaista ostokuittia.' }
+  },
+  c42: {
+    left:  { headline: 'Yle supistuu dramaattisesti', body: 'Areena on nyt pelkkiä säätiedotuksia ja urheilua. Kaunokirjallinen ohjelmatarjonta loppuu. Kirjailijaliitto järjestää mielenosoituksen. Siitä ei tule uutista — uutistoimitus on lakkautettu.' },
+    right: { headline: 'Yle saa lisärahaa', body: 'Kaupallinen media pitää lehdistötilaisuuden otsikolla "Epäreilu kilpailu". Julkinen media pitää vastaavan tilaisuuden otsikolla "Demokratia pelastui". Katsojamäärät pysyvät samoina.' }
+  },
+  c43: {
+    left:  { headline: 'Typpipäästöt jatkuvat', body: 'EU-komissio lähettää virallisen huomautuksen. Ympäristöjärjestöt julkaisevat raportin: "Itämeri kuolee — ja hallitus katsoo." Itämeri jatkaa kuolemistaan. Hitaasti, mutta systemaattisesti.' },
+    right: { headline: 'Maanviljelijät nostavat traktorit esiin', body: 'Kolmesataa traktoria blokeeraa Arkadianmäen. Ylikomisario pyytää neuvoja. Annat neuvon: "Odottakaa." Odottaa, kunnes dieselit loppuvat. Toimii.' }
+  },
+  c44: {
+    left:  { headline: 'Alkoholi kallistuu', body: 'Rajaliikenne Viroon kasvaa 34% ensimmäisessä kvartaalissa. Viron talousministeri lähettää kiitoskortin. Se on sarjakuvamainen kortti jossa on oluttuoppi. Ei ole vitsi.' },
+    right: { headline: 'Alkoholivero jää ennalleen', body: 'Ravintolat iloitsevat. Terveydenhuolto lähettää raportin kustannuksista. Numerot ovat isoja. Laitat raportin alimpaan laatikkoon.' }
+  },
+  c45: {
+    left:  { headline: 'Raide ei etene', body: 'Junat myöhästelevät entiseen tapaan. Pendolinon matkustajat ovat tottuneita. VR twiittaa: "Liikenne normaalissa häiriötilassa." Kaikki tietävät mitä se tarkoittaa.' },
+    right: { headline: 'Juna lähtee asemalta', body: 'Allekirjoitat 3 miljardin raidehankkeen. Valtiovarainministeri itkee hiljaa toimistossaan. Vuosi on 2041 kun ensimmäinen juna ajaa uudella radalla — pääministerin istunto on jo kauan ohi.' }
+  },
+  c46: {
+    left:  { headline: 'Washington on pettynyt', body: 'Yhdysvaltain suurlähettiläs julkaisee lausunnon "huolestaan". Twitterissä Trumpin tukijat kommentoivat Suomen karttaa — suurin osa heistä luulee sen olevan Ruotsi.' },
+    right: { headline: 'Puolustusbudjetti räjähtää', body: '2,5% BKT:sta tarkoittaa 1,5 miljardia lisää. Armeija on innoissaan. Valtiovarainministeri pyörtää kahvikuppinsa. Korjaat sen ennen kuin kukaan näkee.' }
+  },
+  c47: {
+    left:  { headline: 'Tanssi jää tanssimatta', body: 'Nuoret äänestäjät eivät saa tietää kantaasi. He arvaavat sen kuitenkin — somessa leviää vanha kuva sinusta diskoillan jälkeen. Se on parempi kuin mikään TikTok-video.' },
+    right: { headline: 'Pääministeri tanssii', body: 'Video kerää 2 miljoonaa näyttöä ensimmäisessä vuorokaudessa. Puolet niistä on mockausvideoita. Isoäidit tykkäävät alkuperäisestä. Markkinat reagoivat neutraalisti. Kaiken kaikkiaan: ok.' }
+  },
+  c48: {
+    left:  { headline: 'Sudet saavat jäädä', body: 'Kaatolupia myönnetään. Luontoaktivistit ketjuuntuvat. Poliisi irrottaa heidät. Yksi heistä huutaa "Häpeä!" televisiokameralle. Se tulee iltauutisiin. Olet tunnistettavissa taustalla.' },
+    right: { headline: 'Sudet suojellaan', body: 'Kaatolupia ei myönnetä. Maanviljelijät lähettävät hallitukselle kahdeksan lampaan muotokuvan. Kuvia lainataan oppositiopuolueen vaalimateriaaliin.' }
+  },
+  c49: {
+    left:  { headline: 'Vanha järjestelmä pysyy', body: 'Ministeriöt jatkavat kommunikaatiota sähköpostilla, puhelimella ja käytäväkeskusteluilla. Tietoa häviää. Kaikki tietävät tämän. Kukaan ei tee mitään. Suomi toimii.' },
+    right: { headline: 'IT-hanke käynnistetään', body: 'Tilaat 45 miljoonan järjestelmän. Se toimitetaan myöhässä, ylibudjetilla ja puolivalmiina — aivan kuten kaikki aiemmatkin IT-hankkeet. Konsultit ovat tyytyväisiä.' }
+  },
+  c50: {
+    left:  { headline: 'Olympiaunelma siirtyy', body: 'Olympiakomitea on pettynyt mutta ymmärtäväinen. He sanovat "ensi kierroksella". He ovat sanoneet saman neljästi aiemmin.' },
+    right: { headline: 'Suomi hakee olympialaisia', body: 'Lehdistötilaisuus on riemukas. Ulkomaiset toimittajat kysyvät missä Helsinki sijaitsee. Yksi heistä luulee sen olevan Tanska. Maksat 20 miljoonaa selvittääksesi ettei meitä valita.' }
+  },
+  c51: {
+    left:  { headline: 'Tietämättömyys on onnea', body: 'Et tiedä nimeä. Agentti jatkaa työtään. Ehkä. Ehkä SUPO oli väärässä. Epävarmuus on ikävää — varsinkin kun tiedät että epävarmuus on tarkoituksellinen.' },
+    right: { headline: 'Agentti paljastuu', body: 'Saat nimen. Se on tuttu. Hyvin tuttu. Tilanne on kiusallinen sekä virkamiesoikeudellisesti että lounaiden osalta. Informoit presidenttiä. Hän nyökkää hitaasti.' }
+  },
+  c52: {
+    left:  { headline: 'Takaukset evätään', body: 'Kolme rakennusyhtiötä aloittaa YT-neuvottelut saman viikon aikana. Rakennusalan liiton puheenjohtaja pitää tiedotustilaisuuden jossa hän itkee. Oikeasti itkee. Se tulee uutisiin.' },
+    right: { headline: 'Valtio takaa asuntokaupan', body: 'Markkinat helpottavat. Kauppa käynnistyy. Neljä miljardia on nyt kiinni asuntomarkkinoissa joita et hallitse. Yöt ovat levottomia.' }
+  },
+  c53: {
+    left:  { headline: 'Kirkko jää ilman sopimusta', body: 'Arkkipiispa julkaisee pettymyksensä sunnuntaissaarnassa. Se on kuunneltu. Evankelis-luterilainen kirkko tavoittaa edelleen 67% väestöstä. Sinä tavoitat 32%.' },
+    right: { headline: 'Kirkko ja valtio yhteistyöhön', body: 'Sopimus allekirjoitetaan kahvitarjoilun kera. Arkkipiispa mainitsee sinut seuraavan jumalanpalveluksen yhteydessä positiivisesti. Se on harvinaista.' }
+  },
+  c54: {
+    left:  { headline: 'Bürokratia toimii hitaasti', body: 'Hätärahoituksen käsittely kestää 11 päivää. Helleaalto kestää viisi. Vanhustenhoitolaitosten kuolleisuusluvut julkaistaan kahden viikon kuluttua. Ne ovat korkeat.' },
+    right: { headline: 'Hätärahasto avataan', body: 'Jäähdytystilat rahoitetaan, ambulanssit liikkeelle, väestöä tiedotetaan. Helleaalto tappaa silti muutaman. Oppositio kysyy silti miksi toimit myöhässä. Toimit 4 tuntia ja 2 minuuttia hälytyksen jälkeen.' }
+  },
+  c55: {
+    left:  { headline: 'Koalitiopuolue ärisee', body: 'Heinonen pitää puoluekokouksessa puheen jossa sanaa "pettymys" käytetään yhdeksän kertaa. Laskit. Seuraavassa gallupissa koalitiopuolueen kannatus laskee kolme prosenttia.' },
+    right: { headline: 'Uudistus neuvotellaan', body: 'Koalitiopuolue saa uudistuksen nimissään. Se on sellainen jota ei kukaan muu tahtonut, ja sen vaikutukset näkyvät vuonna 2028. Sopu pelastuu. Toistaiseksi.' }
+  },
+  c56: {
+    left:  { headline: 'Faksilaitteet hyllyssä', body: 'Ministeriöt jatkavat analogisella aikakaudella. Viro julkaisee vuosiraportin digitaalisista palveluistaan. Se on saatavilla sähköisesti. Suomen vastaava raportti on postitettu.' },
+    right: { headline: 'AI-strategia hyväksytään', body: 'Chatbot otetaan käyttöön. Ensimmäisenä päivänä se saa 50 000 kyselyä. 40% niistä on testikysymyksiä toimittajilta. Loput ovat kansalaisten oikeita ongelmia, joihin se vastaa puoliksi oikein.' }
+  },
+  c57: {
+    left:  { headline: 'Työviikolle ei muutosta', body: 'Vasemmistoliitto julkaisee lausunnon joka alkaa: "Jälleen kerran hallitus valitsi työnantajien puolen." Se on totta. Se on myös 40 twitterin ketju pitkä.' },
+    right: { headline: 'Selvitys tilataan', body: 'Parlamentaarinen selvitystyöryhmä 35-tunnin työviikosta aloittaa istunnot. Ensimmäisessä kokouksessa todetaan: "Asia on monimutkainen." Tässä kaikki ovat yhtä mieltä.' }
+  },
+  c58: {
+    left:  { headline: 'Vastine kirjoitetaan', body: 'Käytät 4 tuntia 300 sanan tiivistämiseen. Se julkaistaan pääkirjoituksen jälkeen pienemmällä fontilla. Otsikko pääkirjoitukselle pysyy samana: "Hallituksen on erottava."' },
+    right: { headline: 'Kommentoimatta jätetään', body: 'Pääkirjoitus julkaistaan ilman vastinettasi. Se tulkitaan myöntymiseksi. Twitterissä alkaa trendi #EroaHeti. Se on kahdeksas kerta tällä vaalikaudella. Olet tottunut.' }
+  },
+  c59: {
+    left:  { headline: 'Lapsilisät pysyvät ennallaan', body: 'Väestöliitto julkaisee syntyvyysluvut ensi kvartaalilla. Ne ovat huonot. "Hallitus valitsi tasapainon lapsien sijaan" — lausunto on klisee mutta tehoaa.' },
+    right: { headline: 'Lapsilisät kaksinkertaistuvat', body: 'Vanhemmat iloitsevat. Kassa itkee. Syntyvyys ei nouse — se nähdään tilastoissa yhdeksän kuukauden viiveellä, mutta ei nouse siltikään. Taloustieteilijät selittävät miksi. Pitkään.' }
+  },
+  c60: {
+    left:  { headline: 'Tiedotus käynnistyy', body: 'Kerrot kansalle tilanteesta. Media on innoissaan. Fingrid korjaa vian 3 tunnissa 47 minuutissa. Kaikki ovat silti raivoissaan siitä, että "varoitit". Logiikat vaihtelevat.' },
+    right: { headline: 'Korjaus epäonnistuu julkisesti', body: 'Puoli Suomea menee pimeäksi aikataulussa. Media tietää ennen kuin Fingrid on edes tiedottanut. Twiittisi "tilanne hallinnassa" julkaistaan juuri kun valot sammuvat. Klassikko.' }
+  },
+
 };
 
 const FEEDBACK_SPECIAL = {
@@ -1312,7 +1865,7 @@ function activateEffect(name, ttl) {
       mediaajojahti: `Media-ajojahti! Kannatus puolittuu ${ttl} vuoron ajan.`,
       vaalikuume:    'Vaalikuume iski! Koalitio hajoaa ellei sitä pidä koossa.'
     };
-    showNotification(labels[name] || name);
+    showNotification(labels[name] || name, name === 'mediaajojahti' ? 4500 : 3000);
     updateStatusIcons();
   }
 }
@@ -1398,7 +1951,7 @@ function processDebtPerTurn() {
     const laina = Math.round((30 - state.meters.kassa) / 10);
     updateDebt(laina);
     if (laina > 0 && state.velka > 65) {
-      showNotification(`Valtio ottaa lisälainaa. Velka ${state.velka.toFixed(0)}% BKT:sta.`);
+      showNotification(`Valtio ottaa lisälainaa. Velka ${state.velka.toFixed(0)}% BKT:sta.`, 4500);
     }
   }
 
@@ -1407,7 +1960,7 @@ function processDebtPerTurn() {
     const korko = Math.round((state.velka - 80) / 10);
     state.meters.kassa = Math.max(0, state.meters.kassa - korko);
     if (state.turn % 4 === 0) {
-      showNotification(`⚠️ Korkomaksut syövät kassavirtaa. -${korko} Kassa/kk`);
+      showNotification(`⚠️ Korkomaksut syövät kassavirtaa. -${korko} Kassa/kk`, 4500);
     }
   }
 
@@ -1642,7 +2195,7 @@ function doAction(direction) {
   } else if (direction === 'down') {
     if (state.pp < 1) { showNotification('Ei tarpeeksi PP:tä! (vaatii 1)'); return; }
     state.pp -= 1;
-    const ttl = Math.floor(Math.random() * 3) + 3;
+    const ttl = Math.floor(Math.random() * 4) + 5;
     const meterKeys = ['kannatus','kassa','sopu','turva'];
     if (state.committee && state.committee2) {
       // Täynnä — palauta PP ja jätä kortti pöydälle, ei vuoronkulutusta
@@ -1668,12 +2221,12 @@ function doAction(direction) {
   state.turn++;
   document.getElementById('term-fill').style.width = Math.min(100, (state.turn / 48) * 100).toFixed(1) + '%';
 
-  // Committee check
+  // Committee check — kerää valmistuvat jonoon, älä näytä vielä
   for (const slot of ['committee', 'committee2']) {
     if (state[slot]) {
       state[slot].ttl--;
       if (state[slot].ttl <= 0) {
-        resolveCommittee(slot);
+        queueCommitteeResult(slot);
       }
     }
   }
@@ -1709,16 +2262,17 @@ function doAction(direction) {
       if (state.phones[p].level === 3) { crisisPhone = p; break; }
     }
 
-    // Seuraava kortti ladataan vasta kun pelaaja sulkee feedbackin
+    // _pendingNext: ensin committee-jono, sitten kriisi tai uusi kortti
     state._pendingNext = () => {
-      if (crisisPhone) {
+      if (state._committeePending && state._committeePending.length > 0) {
+        const next = state._committeePending.shift();
+        next();
+      } else if (crisisPhone) {
         triggerPhoneCrisis(crisisPhone);
       } else {
         drawCard();
       }
     };
-
-    // closeFeedback() hoitaa jatkamisen kaikille suunnille
   }
 }
 
@@ -1783,7 +2337,7 @@ function applyEffects(effects, phoneChanges) {
   }
 }
 
-function resolveCommittee(slot) {
+function queueCommitteeResult(slot) {
   const c = state[slot];
   if (!c) return;
   const success = Math.random() > 0.45;
@@ -1811,12 +2365,27 @@ function resolveCommittee(slot) {
   state[slot] = null;
   updateHUD();
 
-  // Aseta _pendingNext ENNEN showFeedbackia jotta closeFeedback löytää sen
-  state._pendingNext = () => drawCard();
+  // Lisää committee-tulos jonoon — näytetään kortin feedbackin JÄLKEEN
+  if (!state._committeePending) state._committeePending = [];
+  state._committeePending.push(() => {
+    showFeedback('committee', success ? 'right' : 'left', fb.effects);
+    document.getElementById('feedback-headline').textContent = fb.headline;
+    document.getElementById('feedback-body').textContent = fb.body;
+    // Kun tämä committee-feedback suljetaan, closeFeedback hoitaa seuraavan askeleen
+    state._pendingNext = () => {
+      if (state._committeePending && state._committeePending.length > 0) {
+        const next = state._committeePending.shift();
+        next();
+      } else {
+        drawCard();
+      }
+    };
+  });
+}
 
-  showFeedback('committee', success ? 'right' : 'left', fb.effects);
-  document.getElementById('feedback-headline').textContent = fb.headline;
-  document.getElementById('feedback-body').textContent = fb.body;
+function resolveCommittee(slot) {
+  // Vanha funktio — ei enää käytetä suoraan, säilytetään yhteensopivuuden vuoksi
+  queueCommitteeResult(slot);
 }
 
 function callPhone(key) {
@@ -1960,9 +2529,11 @@ function updateHUD() {
   if (debtEl) {
     const d = state.velka;
     const ratio = Math.max(0, Math.min(1, (d - 60) / 40)); // 60->100% = 0->1
+    const labelEl = document.getElementById('debt-label');
     if (ratio <= 0) {
       debtEl.style.background = 'transparent';
       debtEl.style.boxShadow = 'none';
+      if (labelEl) labelEl.style.opacity = '0';
     } else {
       // Väri: keltainen -> oranssi -> punainen
       const r = Math.round(180 + 75 * ratio);
@@ -1973,6 +2544,10 @@ function updateHUD() {
       const glowSize = Math.round(4 + 12 * ratio);
       debtEl.style.background = `rgba(${r},${g},${b},${alpha})`;
       debtEl.style.boxShadow = `0 0 ${glowSize}px rgba(${r},${g},${b},${glowAlpha})`;
+      if (labelEl) {
+        labelEl.style.opacity = String(0.4 + 0.6 * ratio);
+        labelEl.style.color = `rgba(${r},${g},${b},${0.6 + 0.4 * ratio})`;
+      }
     }
   }
 
@@ -2007,12 +2582,12 @@ function updatePhones() {
 // UI HELPERS
 // ═══════════════════════════════════════
 let notifTimeout;
-function showNotification(msg) {
+function showNotification(msg, duration = 3000) {
   const el = document.getElementById('notification');
   el.textContent = msg;
   el.classList.add('show');
   clearTimeout(notifTimeout);
-  notifTimeout = setTimeout(() => el.classList.remove('show'), 3000);
+  notifTimeout = setTimeout(() => el.classList.remove('show'), duration);
 }
 
 function setLog(msg) {
