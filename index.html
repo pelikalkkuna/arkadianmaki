@@ -579,12 +579,18 @@
 
   .phone.level-0 .phone-name   { color: #2ecc71; }
   .phone.level-0 .phone-status { color: #27ae60; }
+  .phone.level-0 .phone-icon   { animation: buffGlow 2s ease-in-out infinite; }
   .phone.level-1 .phone-name   { color: #6a5030; }
   .phone.level-1 .phone-status { color: #5a4020; }
   .phone.level-2 .phone-name   { color: var(--warn); }
   .phone.level-2 .phone-status { color: #c0600a; }
   .phone.level-3 .phone-name   { color: var(--red); }
   .phone.level-3 .phone-status { color: #a02020; }
+
+  @keyframes buffGlow {
+    0%, 100% { filter: drop-shadow(0 0 3px rgba(46,204,113,0)); }
+    50%       { filter: drop-shadow(0 0 7px rgba(46,204,113,0.9)); }
+  }
 
   /* Notification */
   #notification {
@@ -2277,17 +2283,31 @@ function doAction(direction) {
 }
 
 function applyEffects(effects, phoneChanges) {
-  // Phone debuffs
-  let debuffTotal = 0;
-  for (const p of Object.keys(state.phones)) {
-    const ph = state.phones[p];
-    if (ph.level === 2) debuffTotal -= 4;
-    if (ph.level === 3) debuffTotal -= 10;
+  // ── Puhelinten buff/debuff per mittari ──────────────────────────────────
+  // Taso 0 = BUFF  (+5 puhelimen omaan mittariin joka päätöksellä)
+  // Taso 1 = neutraali, ei vaikutusta
+  // Taso 2 = DEBUFF (-5 puhelimen omaan mittariin)
+  // Taso 3 = KRIISI (-12 puhelimen omaan mittariin + pakkokortti)
+  const phoneCfg = {
+    east:   { meter: 'turva',  buff: 5, debuff2: -5, debuff3: -12 },
+    west:   { meter: 'sopu',   buff: 5, debuff2: -5, debuff3: -12 },
+    market: { meter: 'kassa',  buff: 5, debuff2: -5, debuff3: -12 },
+  };
+
+  const delta = { kannatus: 0, kassa: 0, sopu: 0, turva: 0 };
+  for (const key of ['kannatus','kassa','sopu','turva']) {
+    delta[key] = effects[key] || 0;
+  }
+
+  for (const [p, cfg] of Object.entries(phoneCfg)) {
+    const lvl = state.phones[p].level;
+    if      (lvl === 0) delta[cfg.meter] += cfg.buff;
+    else if (lvl === 2) delta[cfg.meter] += cfg.debuff2;
+    else if (lvl === 3) delta[cfg.meter] += cfg.debuff3;
   }
 
   for (const key of ['kannatus','kassa','sopu','turva']) {
-    let val = effects[key] || 0;
-    if (debuffTotal < 0 && val < 0) val += debuffTotal;
+    let val = delta[key];
     // Media-ajojahti puolittaa positiivisen kannatuksen
     if (key === 'kannatus' && val > 0 && state.effects.mediaajojahti.active) {
       val = Math.floor(val / 2);
@@ -2328,12 +2348,12 @@ function applyEffects(effects, phoneChanges) {
 
   if (phoneChanges) {
     for (const p of Object.keys(phoneChanges)) {
-      // Markkinat-puhelinta ohjaa velka, ei suoraan kortit — muut puhelimet toimivat normaalisti
-      if (p === 'market') continue;
       if (state.phones[p]) {
         state.phones[p].level = Math.max(0, Math.min(3, state.phones[p].level + phoneChanges[p]));
       }
     }
+    // Markkinat-puhelin: korttien muutokset hyväksytään, mutta velka
+    // päivittää sen tason myös automaattisesti updateDebt-logiikalla
   }
 }
 
@@ -2569,7 +2589,7 @@ function updateHUD() {
 }
 
 function updatePhones() {
-  const levels = ['Hyvä 🟢', 'Neutraali', 'Kriittinen ⚠️', 'HÄLYTYS 🔴'];
+  const levels = ['Buff +5 🟢', 'Neutraali', 'Kriittinen ⚠️', 'HÄLYTYS 🔴'];
   for (const [key, ph] of Object.entries(state.phones)) {
     const el = document.getElementById(`phone-${key}`);
     const statusEl = document.getElementById(`ps-${key}`);
