@@ -743,6 +743,7 @@
   <div id="intro-card">
     <div id="intro-title">ARKADIANMÄEN<br>SELVIYTYJÄT</div>
     <div id="intro-subtitle">Poliittinen selviytymispeli</div>
+    <div style="text-align:center; font-family:'IBM Plex Mono',monospace; font-size:clamp(0.6rem,2.4vw,0.75rem); letter-spacing:0.2em; color:#8a7050; margin-top:-0.6rem; margin-bottom:0.6rem;">v1.0</div>
     <div id="intro-rules">
       <div class="rule-item">🎴 Pyyhkäise kortteja vasemmalle tai oikealle tehdäksesi päätöksiä</div>
       <div class="rule-item">📈 Pidä neljä mittaria elossa — kannatus, kassa, sopu ja turva</div>
@@ -855,11 +856,6 @@
 
   <!-- PHONES -->
   <div id="phones">
-    <div class="phone level-1" id="phone-east" onclick="callPhone('east')">
-      <div class="phone-icon">☎️</div>
-      <div class="phone-name">Itä</div>
-      <div class="phone-status" id="ps-east">Neutraali</div>
-    </div>
     <div class="phone level-0" id="phone-west" onclick="callPhone('west')">
       <div class="phone-icon">☎️</div>
       <div class="phone-name">Länsi</div>
@@ -869,6 +865,11 @@
       <div class="phone-icon">☎️</div>
       <div class="phone-name">Markkinat</div>
       <div class="phone-status" id="ps-market">Neutraali</div>
+    </div>
+    <div class="phone level-1" id="phone-east" onclick="callPhone('east')">
+      <div class="phone-icon">☎️</div>
+      <div class="phone-name">Itä</div>
+      <div class="phone-status" id="ps-east">Neutraali</div>
     </div>
   </div>
 
@@ -1569,6 +1570,208 @@ const CARDS = [
       right: { kannatus: -18, kassa: -5, sopu: -8, turva: -8, phone: {}, triggerEffect: 'mediaajojahti', effectTtl: 4 }
     }
   },
+
+  // ── HUMORISTISET TÄYTEKORTIT ──
+  {
+    id: 'h1', category: 'PROTOKOLLA', emoji: '☕',
+    character: 'Valtioneuvoston kansliapäällikkö',
+    text: '"Pääministeri, olemme saaneet 47 sivun selvityksen siitä, pitäisikö kahvitaukojen pituus standardoida 12 vai 15 minuuttiin. Virkakunta odottaa kannanottoa."',
+    leftLabel: '12 minuuttia', rightLabel: '15 minuuttia',
+    effects: {
+      left:  { kannatus: -2, kassa: 1, sopu: 2, turva: 0, phone: {} },
+      right: { kannatus: 3, kassa: -1, sopu: -2, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h2', category: 'KULTTUURI', emoji: '🦅',
+    character: 'Heraldinen toimisto, virkakirje',
+    text: '"Vaakunakomitea pyytää päätöstä: lisätäänkö valtioneuvoston logoon toinen kotka. Perusteluissa todetaan, että yksi kotka "tuntuu yksinäiseltä". Budjettivaikutus 3 400 €."',
+    leftLabel: 'Yksi kotka riittää', rightLabel: 'Lisätään kotka',
+    effects: {
+      left:  { kannatus: 0, kassa: 0, sopu: 3, turva: 0, phone: {} },
+      right: { kannatus: 4, kassa: 0, sopu: -2, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h3', category: 'SISÄPOLITIIKKA', emoji: '🪴',
+    character: 'Eduskunnan tilapalvelut',
+    text: '"Eduskunnan aula-alueen kasveista 3 on kuollut. Uusien kasvien hankinnasta on syntynyt poliittinen debatti: osa kansanedustajista vaatii kotimaisia koivuntaimia, osa eksoottisia palmuköynnöksiä."',
+    leftLabel: 'Koivut, tietenkin', rightLabel: 'Palmu voittaa',
+    effects: {
+      left:  { kannatus: 3, kassa: 0, sopu: 0, turva: 1, phone: {} },
+      right: { kannatus: -2, kassa: 0, sopu: 4, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h4', category: 'MEDIA', emoji: '📸',
+    character: 'Valtioneuvoston viestintäpäällikkö',
+    text: '"Pääministeri, Twitter-tilinne profiilkuva on nyt kolme vuotta vanha. Tutkimukset osoittavat, että tuoreempi kuva nostaisi kannatusta 0,3 prosenttiyksikköä. Haluatteko uuden kuvan?"',
+    leftLabel: 'Vanha kuva pysyy', rightLabel: 'Otetaan uusi kuva',
+    effects: {
+      left:  { kannatus: -1, kassa: 0, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: 4, kassa: -1, sopu: 0, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h5', category: 'PROTOKOLLA', emoji: '🎩',
+    character: 'Zeremonianmestari Hautamäki',
+    text: '"Valtiovieraan vastaanoton pukukoodi on epäselvä. Kaksi ministeriä saapui frakissa, kolme pikkutakissa. Oppositio on jo kuvannut tilanteen. Otetaanko kantaa?"',
+    leftLabel: '"Ei tämä nyt ketään kiinnosta"', rightLabel: 'Virallinen pukukoodimemo',
+    effects: {
+      left:  { kannatus: -3, kassa: 0, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: 2, kassa: -1, sopu: 3, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h6', category: 'HALLINTO', emoji: '📝',
+    character: 'Digipalvelut Finland Oy, projektipäällikkö',
+    text: '"Suomi.fi-sivuston latausaika on 4,2 sekuntia. Optimointi 2,1 sekuntiin maksaa 1,2 miljoonaa. Asiantuntijamme arvioivat, että käyttäjät tuskin huomaisivat eroa. He pyytävät silti rahoitusta."',
+    leftLabel: 'Ei rahoitusta', rightLabel: 'Optimoidaan',
+    effects: {
+      left:  { kannatus: 0, kassa: 2, sopu: -2, turva: 0, phone: {} },
+      right: { kannatus: 2, kassa: -3, sopu: 2, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h7', category: 'KULTTUURI', emoji: '🎵',
+    character: 'Yle Radio Suomi, ohjelmajohtaja',
+    text: '"Iskelmäohjelman ja uutisten välissä on ollut 8 sekunnin hiljaisuus 30 vuotta. Tekninen päivitys poistaisi sen. Kuuntelijapalautetta on tullut 1 400 viestiä. Kaikki ovat hiljaisuuden puolesta."',
+    leftLabel: 'Hiljaisuus pysyy', rightLabel: 'Poistetaan hiljaisuus',
+    effects: {
+      left:  { kannatus: 5, kassa: 0, sopu: 2, turva: 0, phone: {} },
+      right: { kannatus: -4, kassa: 1, sopu: -3, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h8', category: 'HALLINTO', emoji: '🖨️',
+    character: 'VM:n hallintojohtaja Perttilä',
+    text: '"Valtionhallinnon tulostimet kuluttavat 12 % enemmän mustetta kuin EU:n suositukset sallivat. Ratkaisuna on joko kirjasinkoon pienentäminen 0,5 pisteellä tai marginaalien kasvattaminen. Kumpi?"',
+    leftLabel: 'Pienempi kirjasin', rightLabel: 'Isommat marginaalit',
+    effects: {
+      left:  { kannatus: 0, kassa: 1, sopu: -1, turva: 0, phone: {} },
+      right: { kannatus: 0, kassa: 1, sopu: 1, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h9', category: 'MEDIA', emoji: '🐦',
+    character: 'Some-strategi Leinonen',
+    text: '"Analyysi osoittaa: jos julkaisette kuvan Suomen luonnosta maanantaisin klo 11:17, kannatusluvut nousevat tilastollisesti merkitsevällä tavalla. Haluatteko kokeilla?"',
+    leftLabel: 'Liian naurettavaa', rightLabel: 'Testataan strategiaa',
+    effects: {
+      left:  { kannatus: -1, kassa: 0, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: 4, kassa: -1, sopu: -1, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h10', category: 'OPPOSITIO', emoji: '🏓',
+    character: 'Kansanedustaja Makkonen (kesk.)',
+    text: '"Vaadin eduskuntaan pingispöytää. Ruotsilla on. Norjalla on. Meillä ei ole. Tämä on häpeä. Maksaisi 800 euroa."',
+    leftLabel: 'Ei pingistä', rightLabel: 'Pöytä hankitaan',
+    effects: {
+      left:  { kannatus: -3, kassa: 0, sopu: -3, turva: 0, phone: {} },
+      right: { kannatus: 4, kassa: 0, sopu: 4, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h11', category: 'PROTOKOLLA', emoji: '🌡️',
+    character: 'Valtioneuvoston kiinteistöt',
+    text: '"Kokoushuone 4B:n lämpötila on noussut poliittiseksi kysymykseksi. Vasemmistoliitto haluaa 21°C, kokoomus 19°C. Kompromissiehdotus on 20°C. Tarvitaan pääministerin ratkaisu."',
+    leftLabel: '19°C (säästetään)', rightLabel: '21°C (inhimillisempää)',
+    effects: {
+      left:  { kannatus: -2, kassa: 1, sopu: -4, turva: 0, phone: {} },
+      right: { kannatus: 3, kassa: -1, sopu: 4, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h12', category: 'HYVINVOINTI', emoji: '🐕',
+    character: 'Eläinsuojelujärjestö, puheenjohtaja Koivisto',
+    text: '"Tutkimme, että stressaantunut virkakunta tekisi parempia päätöksiä, jos ministeriöissä saisi käydä koiria. Pilottiohjelma maksaisi 40 000 €. Allergiset virkamiehet ovat jo lähettäneet vastalauseen."',
+    leftLabel: 'Ei koiria töihin', rightLabel: 'Pilotti käynnistetään',
+    effects: {
+      left:  { kannatus: -4, kassa: 0, sopu: -2, turva: 0, phone: {} },
+      right: { kannatus: 6, kassa: -1, sopu: 3, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h13', category: 'HALLINTO', emoji: '🗓️',
+    character: 'Hallituksen kokoussihteeristö',
+    text: '"Tilastojen mukaan hallituksen kokoukset alkavat keskimäärin 7 minuuttia myöhässä. Ehdotetaan joko kalenteri-applikaation vaihtamista tai sakkomaksua myöhästyville ministereille (5€/min)."',
+    leftLabel: 'Uusi sovellus', rightLabel: 'Sakkomaksut',
+    effects: {
+      left:  { kannatus: 0, kassa: -1, sopu: 2, turva: 0, phone: {} },
+      right: { kannatus: -3, kassa: 2, sopu: -4, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h14', category: 'KULTTUURI', emoji: '🏋️',
+    character: 'Eduskunnan liikuntavastaava',
+    text: '"Kansanedustajien sairaslomapäivät ovat kasvaneet 18 %. Ehdotamme pakollista aamujumppaa klo 8:00 tai vapaaehtoisuuteen perustuvaa joogatuntia klo 17:00. Molemmat maksavat saman."',
+    leftLabel: 'Pakollinen aamujumppa', rightLabel: 'Vapaaehtoinen jooga',
+    effects: {
+      left:  { kannatus: -3, kassa: -1, sopu: -3, turva: 2, phone: {} },
+      right: { kannatus: 3, kassa: -1, sopu: 3, turva: 1, phone: {} }
+    }
+  },
+  {
+    id: 'h15', category: 'MEDIA', emoji: '🎤',
+    character: 'Yle Areena, dokumenttiohjaaja Saarinen',
+    text: '"Haluamme kuvata pääministerin arkea viikon ajan. Julkisuusarvio: erittäin positiivinen. Riskiarvio: myös erittäin korkea. Tiedottajanne on jo jonossa odottamassa vastaustanne."',
+    leftLabel: 'Ei kameraa arkeen', rightLabel: 'Kuvataan dokumentti',
+    effects: {
+      left:  { kannatus: -2, kassa: 0, sopu: 0, turva: 2, phone: {} },
+      right: { kannatus: 7, kassa: 0, sopu: -2, turva: -3, phone: {} }
+    }
+  },
+  {
+    id: 'h16', category: 'SISÄPOLITIIKKA', emoji: '🧃',
+    character: 'Kansanedustaja Ylönen (vihr.)',
+    text: '"Eduskunnan kahvilassa myydään edelleen Fanta Appelsiinia. Se on ultraprosessoitu juoma. Vaadin tilalle luomumehua. Olen kerännyt 23 allekirjoitusta. Tarvitaan kanta."',
+    leftLabel: 'Fanta pysyy', rightLabel: 'Luomumehuksi',
+    effects: {
+      left:  { kannatus: 2, kassa: 1, sopu: -3, turva: 0, phone: {} },
+      right: { kannatus: 3, kassa: -1, sopu: 3, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h17', category: 'HALLINTO', emoji: '🔏',
+    character: 'Tietosuojavaltuutettu Harjula',
+    text: '"Pääministerin toimistolla on ikkuna, josta ulkopuoliset voivat teoriassa nähdä sisälle. GDPR:n näkökulmasta tilanne on tulkinnanvarainen. Ehdotetaan verhoja (340 €) tai juridista analyysiä (28 000 €)."',
+    leftLabel: 'Ostetaan verhot', rightLabel: 'Tilataan analyysi',
+    effects: {
+      left:  { kannatus: 2, kassa: 0, sopu: 0, turva: 1, phone: {} },
+      right: { kannatus: -2, kassa: -3, sopu: -2, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h18', category: 'OPPOSITIO', emoji: '🧻',
+    character: 'Toimittaja Hämäläinen, Iltasanomat',
+    text: '"Olemme saaneet tiedon, että Valtioneuvoston linnassa on vaihdettu wc-paperin tavarantoimittajaa. Laadukkaampi paperi maksaa 12 % enemmän. Haluatteko kommentoida?"',
+    leftLabel: '"En kommentoi wc-paperia"', rightLabel: 'Puolustetaan hankintaa',
+    effects: {
+      left:  { kannatus: 3, kassa: 0, sopu: 0, turva: 0, phone: {} },
+      right: { kannatus: -5, kassa: 0, sopu: -2, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h19', category: 'KULTTUURI', emoji: '🎄',
+    character: 'Valtioneuvoston juhlatoimikunta',
+    text: '"Pikkujoulujen teemasta ei ole päästy yksimielisyyteen. Ehdolla ovat: A) Klassinen joulu B) Pohjoismaisuus C) \'Resilienssi ja uudistuminen\'. Tiedottaja on pyörtynyt jo kerran."',
+    leftLabel: 'Klassinen joulu', rightLabel: 'Resilienssi-teema',
+    effects: {
+      left:  { kannatus: 4, kassa: 0, sopu: 3, turva: 0, phone: {} },
+      right: { kannatus: -3, kassa: 0, sopu: -4, turva: 0, phone: {} }
+    }
+  },
+  {
+    id: 'h20', category: 'PROTOKOLLA', emoji: '🤖',
+    character: 'Tekoälykoordinaattori, VM',
+    text: '"ChatGPT on laatinut vaihtoehtoisen hallitusohjelman. Se on 340 sivua, erittäin johdonmukainen ja täysin poliittisesti mahdoton toteuttaa. Julkaistaanko se?"',
+    leftLabel: 'Ei julkaista', rightLabel: 'Julkaistaan läpinäkyvyydestä',
+    effects: {
+      left:  { kannatus: -2, kassa: 0, sopu: 2, turva: 0, phone: {} },
+      right: { kannatus: 5, kassa: 0, sopu: -3, turva: 0, phone: {} }
+    }
+  },
 ];
 
 const PHONE_CALL_CARDS = {
@@ -1843,6 +2046,88 @@ const FEEDBACK = {
     right: { headline: 'Korjaus epäonnistuu julkisesti', body: 'Puoli Suomea menee pimeäksi aikataulussa. Media tietää ennen kuin Fingrid on edes tiedottanut. Twiittisi "tilanne hallinnassa" julkaistaan juuri kun valot sammuvat. Klassikko.' }
   },
 
+  // ── HUMORISTISET TÄYTEKORTIT — FEEDBACKIT ──
+  h1: {
+    left:  { headline: '12 minuuttia. Laki on laki.', body: 'Kansliapäällikkö kirjaa päätöksen viralliseen pöytäkirjaan. 47-sivuinen selvitys arkistoidaan. Kahvitauko kestää seuraavana päivänä 14 minuuttia. Kukaan ei mainitse asiaa.' },
+    right: { headline: '15 minuuttia. Inhimillisyys voittaa.', body: 'Virkakunta hengähtää. Tuottavuustutkijat lähettävät kiitoskirjeen. Kolme viikkoa myöhemmin oppositio vaatii selvitystä siitä, meneekö veronmaksajien aika hukkaan kahvitauoilla.' }
+  },
+  h2: {
+    left:  { headline: 'Yksi kotka, yksi kansa.', body: 'Heraldinen toimisto kirjaa päätöksen. Yksinäinen kotka jatkaa valtiollista uraansa stoalaisella arvokkuudella. Säästät 3 400 euroa. Käytät ne seuraavassa kokouksessa suklaaseen.' },
+    right: { headline: 'Kaksi kotkaa lentää.', body: 'Logo päivitetään. Graafikko lähettää neljä versiota. Valitset väärän. Lähetetään uusi versio. Kolmen kuukauden ja kahden lisäkokouksen jälkeen logo on valmis. Kukaan ei huomaa eroa.' }
+  },
+  h3: {
+    left:  { headline: 'Koivu on vastaus.', body: 'Taimet tilataan Keski-Suomesta. Ne saapuvat väärässä ruukussa. Vaihdetaan ruukku. Puoluetoimisto julkaisee Instagram-kuvan koivuista. Kommenteissa yksi henkilö kysyy onko ne GMO.' },
+    right: { headline: 'Palmu nousee eduskunnan aulaan.', body: 'Palmu saapuu. Se on iso. Liian iso. Katon korkeus tarkistetaan jälkikäteen. Iltapäivälehti julkaisee jutun otsikolla: "Onko tämä veronmaksajien rahoilla hankittu luksuskasvi?"' }
+  },
+  h4: {
+    left:  { headline: 'Vanha kuva pysyy. Klassikko.', body: 'Kolme vuotta vanha kuva jatkaa julkista uraansa. Tiedottaja huokaa hiljaa. Joku laskee Twitterissä montako harmaata hiusta on tullut lisää. Luku on oikein.' },
+    right: { headline: 'Uusi kuva, uusi minä.', body: 'Valokuvaaja saapuu paikalle. Otetaan 340 kuvaa. Valitaan se jossa silmät ovat auki. Julkaistaan. Kannatuksen nousu 0,3 prosenttiyksikköä vahvistetaan viikon kuluttua. Se on oikea luku.' }
+  },
+  h5: {
+    left:  { headline: '"Tämä ei ketään kiinnosta."', body: 'Lause on nyt lainattu kolmessa mediassa. Zeremonianmestari lähettää sähköpostin otsikolla: "Pukukoodimemo: tarpeellisuus harkittava uudelleen." Harkitset. Et tee mitään.' },
+    right: { headline: 'Pukukoodimemo lähetetään.', body: 'Neljän sivun ohjeistus jaetaan kaikille ministereille. Seuraavassa valtiovierailussa yksi ministeri saapuu silti farkuissa. Hän sanoo, ettei lukenut memoa. Hän on lukenut memon.' }
+  },
+  h6: {
+    left:  { headline: 'Digihanke kuolee hiljaa.', body: 'Projektipäällikkö siirtyy toiselle hankkeelle jossa optimoidaan toista asiaa. Suomi.fi latautuu edelleen 4,2 sekunnissa. Kansalaiset eivät huomaa. Asiantuntijat huomaavat. He kirjoittavat siitä blogin.' },
+    right: { headline: '1,2 miljoonaa sekunnin puolesta.', body: 'Optimointi valmistuu. Sivusto latautuu nyt 2,1 sekunnissa. Käyttäjätutkimus osoittaa, että kukaan ei huomaa eroa. Projektipäällikkö lähettää kiitoskirjeen. Se latautuu välittömästi.' }
+  },
+  h7: {
+    left:  { headline: 'Hiljaisuus on pyhä.', body: '8 sekunnin tauko jatkaa olemassaoloaan. Kuuntelijat eivät tiedä miksi, mutta pitävät sitä. Joku väittää sen olevan kansallinen hetki hengähtää. Se on ehkä totta.' },
+    right: { headline: 'Hiljaisuus poistetaan.', body: 'Iskelmä ja uutiset virtaavat nyt saumattomasti yhteen. Kuuntelijapalautetta saapuu 2 300 viestiä ensimmäisessä viikossa. Kaikki ovat vihaisia. Hiljaisuus palautetaan neljän kuukauden kuluttua.' }
+  },
+  h8: {
+    left:  { headline: 'Kirjasin pienenee.', body: 'Marginaalit pysyvät. Teksti kutistuu puoli pistettä. Kolme vanhempaa virkamiestä tilaa uudet silmälasit. He eivät yhdistä asiaa toisiinsa. Mustesäästö on 7,3 prosenttia. Kirjataan raporttiin.' },
+    right: { headline: 'Marginaalit kasvavat.', body: 'Asiakirjat muuttuvat väljemmiksi. Ilmava ulkoasu koetaan ammattimaiseksi. Tulostussivumäärä kasvaa 11 prosenttia. Musteen kulutus nousee. Kierros on täydellinen.' }
+  },
+  h9: {
+    left:  { headline: 'Liian naurettavaa. Kunnioitettavaa.', body: 'Kieltäydyt some-strategiasta. Leinonen kirjaa sen muistiin. Seuraavalla viikolla kannatusluku laskee 0,8 prosenttiyksikköä. Leinonen ei sano mitään. Hän katsoo.' },
+    right: { headline: 'Maanantai klo 11:17. Mänty. Suomi.', body: 'Ensimmäinen kuva julkaistaan. Tykkäyksiä 4 200. Seuraavana maanantaina julkaistaan toinen. Kolmen viikon kuluttua oppositio twiittaa mäntykuvan samaan aikaan. Kulttuurisota alkaa.' }
+  },
+  h10: {
+    left:  { headline: 'Pingis torpataan.', body: 'Makkonen pitää eduskunnassa puheen pingiksen puolesta. Se kestää 22 minuuttia. Hän mainitsee Norjan neljä kertaa. Lajiliitto lähettää kannustuskirjeen. Et vastaa siihen.' },
+    right: { headline: 'Pingispöytä saapuu eduskuntaan.', body: 'Pöytä asennetaan käytävälle. Ensimmäisessä pelissä häviää valtiovarainministeri. Hän häviää myös toisessa. Hän vaatii remondia. Remondi kestää kolme tuntia. Budjettikokous myöhästyy.' }
+  },
+  h11: {
+    left:  { headline: '19 astetta. Tehokkuus voittaa.', body: 'Kokoushuone viilenee. Vasemmistoliiton edustaja saapuu villaneuleessa. Hän ei kommentoi. Energialasku pienenee 40 euroa vuodessa. Kirjataan säästöksi.' },
+    right: { headline: '21 astetta. Ihminen voittaa.', body: 'Huone lämpenee. Kokoomusedustaja avaa takin. Kokoukset pitenevät tilastollisesti 4 minuuttia lämpimämmissä huoneissa. Tämä on joko hyvä tai huono asia riippuen siitä kenen budjetti on käsittelyssä.' }
+  },
+  h12: {
+    left:  { headline: 'Koirat pysyvät kotona.', body: 'Allergiset virkamiehet lähettävät kiitossähköpostin. Eläinsuojelujärjestö julkaisee pettymyksensä. Koiranomistajat liittyvät verkkopetitiolle. Se kerää 28 000 nimeä viikonlopussa. Koirista tulee poliittinen kysymys.' },
+    right: { headline: 'Koirat tulevat töihin.', body: 'Pilotti käynnistyy. Ensimmäisenä päivänä koira syö yhden virkamiehen lounaan. Toisena päivänä koira nukahtaa budjettipalaverissa. Kolmantena päivänä koira on suositumpi kuin kukaan ministeri. Pilotti jatkuu.' }
+  },
+  h13: {
+    left:  { headline: 'Kalenteri vaihdetaan.', body: 'Uusi sovellus hankitaan 14 000 euron vuosilisenssillä. Integraatio vanhaan järjestelmään kestää kolme kuukautta. Kokoukset myöhästyvät jatkossakin — nyt keskimäärin 9 minuuttia.' },
+    right: { headline: 'Sakkomaksut käyttöön.', body: 'Ensimmäisellä viikolla kerätään 340 euroa. Valtiovarainministeri saapuu täsmälleen ajoissa joka kokoukseen. Hän seisoo käytävällä ja saapuu sekunnilleen oikeaan aikaan. Tämä on hieman pelottavaa.' }
+  },
+  h14: {
+    left:  { headline: 'Pakollinen aamujumppa alkaa.', body: 'Klo 8:00 sali on puolityhjä. Puolue-edustaja Kivimäki kertoo medialle tuntevansa olonsa "kuin armeijassa". Lause leviää. Oppositio vaatii selvitystä siitä, onko hallitus muuttumassa autoritaariseksi.' },
+    right: { headline: 'Vapaaehtoinen jooga alkaa.', body: 'Ensimmäiselle tunnille saapuu 3 henkilöä. Yksi heistä on ohjaaja. Kuukauden kuluttua tila on täynnä. Valtiovarainministeri osallistuu joka tiistai. Hän on yllättävän joustava.' }
+  },
+  h15: {
+    left:  { headline: 'Kamera pysyy poissa.', body: 'Saarinen ymmärtää. Juuri ja juuri. Yle Areena tekee sen sijaan dokumentin opposition pääministeriehdokkaasta. Se on hymyilevä ja aurinkoinen. Se saa 800 000 katsojaa.' },
+    right: { headline: 'Kamerat saapuvat.', body: 'Päivä yksi menee hyvin. Päivä kolme on haastava. Päivä viisi: mikrofonit poimivat lauseen jota ei ollut tarkoitettu lähetettäväksi. Lauseen konteksti selitetään lehdistötilaisuudessa. Konteksti ei auta.' }
+  },
+  h16: {
+    left:  { headline: 'Fanta pysyy. Kansa iloitsee.', body: 'Ylönen järjestää protestin kahvilan ulkopuolella. Paikalle saapuu neljä ihmistä ja yksi toimittaja joka oli muutenkin menossa lounaalle. Fanta myy ennätysmääriä seuraavalla viikolla.' },
+    right: { headline: 'Luomumehuksi. Terveellisempää.', body: 'Mehu saapuu. Se on hyvää. Hinta on 2,40 euroa enemmän per pullo. Neljä kansanedustajaa ottaa salaa Fantan omasta kaapistaan. Tämä tiedetään koska joku twiittaa siitä.' }
+  },
+  h17: {
+    left:  { headline: 'Verhot hankitaan. 340 euroa.', body: 'Verhot asennetaan. Ne ovat beige. Tietosuojavaltuutettu lähettää kiitossähköpostin. Juridisen analyysin tilauksen peruuntumisesta lähetetään 800 euron peruutusmaksulasku. Verhot maksavat nyt 1 140 euroa.' },
+    right: { headline: '28 000 euroa GDPR-analyysiin.', body: 'Analyysi valmistuu neljän kuukauden kuluttua. Se on 68 sivua. Suositus on: "Hankitaan verhot." Raportissa käytetään termiä "datanäkyvyysriski" yhteensä 14 kertaa.' }
+  },
+  h18: {
+    left:  { headline: '"En kommentoi wc-paperia."', body: 'Lause on suora, selkeä ja arvokas. Se on myös uutinen. "Pääministeri kieltäytyi kommentoimasta" — otsikko on teknisesti tosi. Paperi jatkaa rooliaan hiljaisena mutta tärkeänä.' },
+    right: { headline: 'Hankinta puolustetaan.', body: '"Laadukkaampi paperi on kustannustehokas pitkällä aikavälillä" — lausunto on järkevä. Iltasanomat julkaisee sen. Oppositio vaatii tietopyyntöä kaikista valtioneuvoston paperihankintapäätöksistä vuodesta 2018.' }
+  },
+  h19: {
+    left:  { headline: 'Klassinen joulu voittaa.', body: 'Pikkujoulut ovat lämpimät ja tutut. Tiedottaja hengähtää helpotuksesta. Joku tuo glögiä. Toinen tuo piparkakkuja. Valtiovarainministeri syö kuusi piparkakkua ja kertoo sen olevan "välttämätön investointi mielenterveyteen".' },
+    right: { headline: 'Resilienssi ja uudistuminen -teema.', body: 'Pikkujoulut ovat erikoiset. Koristelut ovat "rohkeasti minimalistiset" eli ei koristeluja. Puhe resilienssiä kestää 12 minuuttia. Tiedottaja pyörtyy toisen kerran. Kaikki muistavat nämä pikkujoulut.' }
+  },
+  h20: {
+    left:  { headline: 'Tekoälyn ohjelma haudataan.', body: 'ChatGPT:n hallitusohjelma arkistoidaan. Projektipäällikkö toteaa sen olevan "mielenkiintoinen pohjatyö". Lehdistö ei saa tietää. Lehdistö saa tietää kahden viikon kuluttua. Otsikko: "Hallitus hylkäsi AI-suunnitelman — mitä se sisälsi?"' },
+    right: { headline: 'Tekoälyohjelma julkaistaan.', body: 'Raportti on verkossa. Se on selkeä, looginen ja mahdoton toteuttaa. Oppositio lukee sen yön yli ja löytää kolme kohtaa joihin he ovat samaa mieltä. He eivät kerro tätä julkisesti. Toimittajat lukevat sen ja kirjoittavat 14 artikkelia. Yksi niistä on hyvä.' }
+  },
+
 };
 
 const FEEDBACK_SPECIAL = {
@@ -1890,7 +2175,7 @@ function processStatusEffects() {
     fx.mediaajojahti.ttl--;
     if (fx.mediaajojahti.ttl <= 0) {
       fx.mediaajojahti.active = false;
-      showNotification('Media-ajojahti ohi. Toimittajat siirtyivät toiseen kohteeseen.');
+      showNotification('📰 Ajojahti hiipuu. Huomenna on jo uusi uutinen.', 4000);
     }
   }
 
@@ -2055,6 +2340,47 @@ function drawCard() {
   state.currentCard = state.cardQueue.shift();
   renderCard(state.currentCard);
   resetCardPosition();
+  showCrisisContextNotification(state.currentCard);
+}
+
+function showCrisisContextNotification(card) {
+  const fx = state.effects;
+  const velka = state.velka;
+  const lakkoAktiivinen = fx.lakkoaalto && fx.lakkoaalto.active;
+  const ajojahtiAktiivinen = fx.mediaajojahti && fx.mediaajojahti.active;
+
+  // Media-ajojahti — eskaloituva tökitys, ei mitään tehtävissä
+  if (ajojahtiAktiivinen) {
+    const ttl = fx.mediaajojahti.ttl;
+    if (ttl <= 1) {
+      showNotification('📰 Viimeinen aalto. Toimittajat etsivät jo seuraavaa kohdetta.', 3500);
+    } else if (ttl === 2) {
+      showNotification('📰 Otsikoita tulee lisää. Et voi tehdä mitään. Odota.', 3500);
+    } else {
+      showNotification('📰 Media-ajojahti käynnissä — toimittajat odottavat ulkona. Kannatus vuotaa.', 3500);
+    }
+    if (!lakkoAktiivinen) return;
+  }
+
+  // Lakko aktiivinen — onko tämä purkukortti?
+  if (lakkoAktiivinen) {
+    const isPurkukortti = card.effects &&
+      ((card.effects.right && card.effects.right.resolveEffect === 'lakkoaalto') ||
+       (card.effects.left  && card.effects.left.resolveEffect  === 'lakkoaalto'));
+    if (isPurkukortti) {
+      showNotification('🔴 Tämä on se hetki. KYLLÄ purkaa lakon.', 4000);
+    } else {
+      showNotification('🔴 Lakko käynnissä — kannatus vuotaa joka vuoro. Löydä purkukortti.', 3500);
+    }
+    return;
+  }
+
+  // Velka kriittinen
+  if (velka >= 85) {
+    showNotification('💸 Konkurssikuilu. Jokainen penni ratkaisee.', 3500);
+  } else if (velka >= 70) {
+    showNotification('💸 Velka kasvaa — talousvaikutteiset päätökset kertautuvat nyt.', 3000);
+  }
 }
 
 function renderCard(card) {
@@ -2211,7 +2537,9 @@ function doAction(direction) {
       return; // ei turn++, ei _pendingNext
     }
     const slot = state.committee ? 'committee2' : 'committee';
-    state[slot] = { ttl, meter: meterKeys[Math.floor(Math.random()*4)], card: card.id };
+    state[slot] = { ttl, originalTtl: ttl, meter: meterKeys[Math.floor(Math.random()*4)], card: card.id };
+    const meterLabels = { kannatus: 'Kannatus', kassa: 'Kassa', sopu: 'Sopu', turva: 'Turva' };
+    showNotification(`⚗️ Työryhmä perustettu — ratkaisee ${ttl} vuoron päästä. Vaikuttaa: ${meterLabels[state[slot].meter]}`, 4000);
     flyCard('down');
     // feedback avataan 450ms päästä, _pendingNext asetetaan sen jälkeen synkronisesti
     setTimeout(() => showFeedback(card.id, 'down', {}), 450);
@@ -2230,9 +2558,17 @@ function doAction(direction) {
   // Committee check — kerää valmistuvat jonoon, älä näytä vielä
   for (const slot of ['committee', 'committee2']) {
     if (state[slot]) {
+      const meterLabels = { kannatus: 'Kannatus', kassa: 'Kassa', sopu: 'Sopu', turva: 'Turva' };
       state[slot].ttl--;
-      if (state[slot].ttl <= 0) {
+      const ttlLeft = state[slot].ttl;
+      const originalTtl = state[slot].originalTtl || ttlLeft + 1;
+      const midpoint = Math.floor(originalTtl / 2);
+      if (ttlLeft <= 0) {
         queueCommitteeResult(slot);
+      } else if (ttlLeft === 1) {
+        showNotification(`⚗️ Työryhmä palaa huomenna tuloksin — valmistaudu. (${meterLabels[state[slot].meter]})`, 3500);
+      } else if (ttlLeft === midpoint) {
+        showNotification(`⚗️ Selvitystyö etenee — ratkeaa ${ttlLeft} vuoron päästä. (${meterLabels[state[slot].meter]})`, 3000);
       }
     }
   }
